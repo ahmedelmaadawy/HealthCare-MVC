@@ -1,4 +1,8 @@
+using HealthCare.BusinessLogic.Interfaces;
+using HealthCare.BusinessLogic.Services;
 using HealthCare.DataAccess.Context;
+using HealthCare.DataAccess.Interfaces;
+using HealthCare.DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare.Presentaion
@@ -15,6 +19,9 @@ namespace HealthCare.Presentaion
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("default"));
             });
+            builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IDoctorService, DoctorService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,7 +37,7 @@ namespace HealthCare.Presentaion
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Doctor}/{action=Index}/{id?}");
 
             app.Run();
         }
