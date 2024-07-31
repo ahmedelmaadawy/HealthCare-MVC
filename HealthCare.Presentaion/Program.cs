@@ -1,3 +1,6 @@
+using HealthCare.DataAccess.Context;
+using Microsoft.EntityFrameworkCore;
+
 namespace HealthCare.Presentaion
 {
     public class Program
@@ -8,7 +11,10 @@ namespace HealthCare.Presentaion
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("default"));
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
