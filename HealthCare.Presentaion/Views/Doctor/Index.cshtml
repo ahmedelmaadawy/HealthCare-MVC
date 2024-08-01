@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HealthCare.DataAccess.Models.Doctor>
+﻿@model IEnumerable<HealthCare.Presentaion.ViewModels.DoctorToDisplayVM>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,14 +13,9 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.FullName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Specialization)
             </th>
@@ -37,14 +32,9 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @Html.DisplayFor(modelItem => item.FullName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Specialization)
             </td>
