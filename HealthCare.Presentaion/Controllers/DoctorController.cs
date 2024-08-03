@@ -6,8 +6,6 @@ namespace HealthCare.Presentaion.Controllers
 {
     public class DoctorController : Controller
     {
-        //this is me
-        // Mo Sabaer
         private readonly IDoctorService _service;
         public DoctorController(IDoctorService service)
         {
