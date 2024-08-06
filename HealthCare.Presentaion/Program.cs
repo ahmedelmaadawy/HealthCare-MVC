@@ -23,6 +23,7 @@ namespace HealthCare.Presentaion
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IDoctorService, DoctorService>();
             builder.Services.AddAutoMapper(typeof(Program));
+            //Add Authentication
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
