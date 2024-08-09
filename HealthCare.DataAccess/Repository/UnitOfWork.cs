@@ -8,10 +8,13 @@ namespace HealthCare.DataAccess.Repository
         public IDoctorRepository Doctors { get; }
 
         private readonly ApplicationDbContext _context;
+        public ITimeSlotRepository TimeSlots { get; private set; }
+
 
         public UnitOfWork(ApplicationDbContext context, IDoctorRepository doctors)
         {
             _context = context;
+            TimeSlots = new TimeSlotRepository(_context);
             Doctors = doctors;
         }
         public int Compelete()
