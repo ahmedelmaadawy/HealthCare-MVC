@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using HealthCare.BusinessLogic.Interfaces;
-using HealthCare.DataAccess.Models;
+﻿using HealthCare.BusinessLogic.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HealthCare.Presentaion.Controllers
 {
@@ -8,18 +7,17 @@ namespace HealthCare.Presentaion.Controllers
     {
         private readonly IAppointmentServices _services;
         public AppointmentController(IAppointmentServices appointmentServices)
-        { 
+        {
             _services = appointmentServices;
         }
-        
-        public IActionResult GetAllAppointmentsForThatDay(int doctorID ,DateTime day)
+        public IActionResult GetAllAppointmentsForThatDay(int doctorID, DateTime day)
         {
-           var model = _services.GetAllAppointmentsForThatDay(doctorID, day);
+            var model = _services.GetAllAppointmentsForThatDay(doctorID, day);
             return View(model);
         }
-        public IActionResult CompletedAppointment(int Id,DateTime day,int doctorId)
-        { 
-         _services.CompletedAppointment(Id);
+        public IActionResult CompletedAppointment(int Id, DateTime day, int doctorId)
+        {
+            _services.CompletedAppointment(Id);
             return RedirectToAction(nameof(GetAllAppointmentsForThatDay), new { doctorID = doctorId, Day = day });
         }
         public IActionResult GetAllAppointmentsForThatPatient(int ID)
@@ -31,7 +29,7 @@ namespace HealthCare.Presentaion.Controllers
         public IActionResult CancleAppointment(int Id)
         {
             _services.CancleAppointment(Id);
-            return RedirectToAction(nameof(GetAllAppointmentsForThatPatient), new {id =Id });
+            return RedirectToAction(nameof(GetAllAppointmentsForThatPatient), new { id = Id });
         }
 
 

@@ -5,10 +5,11 @@ namespace HealthCare.DataAccess.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
+        private readonly ApplicationDbContext _context;
+
         public IDoctorRepository Doctors { get; }
         public IPatientRepository Patients { get; }
 
-        private readonly ApplicationDbContext _context;
         public IAppointmentRepository Appointments { get; }
         public ITimeSlotRepository TimeSlots { get; private set; }
 

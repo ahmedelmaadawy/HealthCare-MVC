@@ -4,7 +4,6 @@
     {
         IAppointmentRepository Appointments { get; }
         ITimeSlotRepository TimeSlots { get; }
-
         IDoctorRepository Doctors { get; }
         IPatientRepository Patients { get; }
 

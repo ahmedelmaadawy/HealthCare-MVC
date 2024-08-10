@@ -3,11 +3,6 @@ using HealthCare.DataAccess.Enums;
 using HealthCare.DataAccess.Interfaces;
 using HealthCare.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthCare.DataAccess.Repository
 {
@@ -18,15 +13,15 @@ namespace HealthCare.DataAccess.Repository
 
         public AppointmentRepository(ApplicationDbContext context)
         {
-            _context=context;
+            _context = context;
         }
 
-        public List<Appointment> GetAllAppointmentsForThatDay(int doctorId , DateTime day)
+        public List<Appointment> GetAppointmentByDoctorId(int doctorId)
         {
-           var apps = _context.Appointments.Where(x => x.DoctorId == doctorId && x.DateTime.Date == day.Date).Include(a =>a.Patient).ToList();
-            return apps;
+            var appointments = _context.Appointments.Where(x => x.DoctorId == doctorId).Include(a => a.Patient).ToList();
+            return appointments;
         }
-        
+
         public void BookAppointment(Appointment appointment)
         {
             appointment.Status = AppointmentStatus.Scheduled;
@@ -36,27 +31,26 @@ namespace HealthCare.DataAccess.Repository
         public void ChangeAppointment(Appointment appointment)
         {
             _context.Appointments.Update(appointment);
-
         }
         public void CancleAppointment(int ID)
         {
-            var appointment = _context.Appointments.FirstOrDefault(_x => _x.Id == ID);
+            var appointment = _context.Appointments.FirstOrDefault(x => x.Id == ID);
             appointment.Status = AppointmentStatus.Canceled;
             ChangeAppointment(appointment);
         }
 
         public void CompletedAppointment(int id)
         {
-            var appointment = _context.Appointments.FirstOrDefault(_x => _x.Id ==id);
-             appointment.Status = AppointmentStatus.Completed;
+            var appointment = _context.Appointments.FirstOrDefault(x => x.Id == id);
+            appointment.Status = AppointmentStatus.Completed;
             ChangeAppointment(appointment);
         }
         public List<Appointment> GetAllAppointmentsForThatPatient(int patientId)
         {
-            return _context.Appointments.Where(x => x.PatientId == patientId ).Include(x => x.Doctor).ToList();
+            return _context.Appointments.Where(x => x.PatientId == patientId).Include(x => x.Doctor).ToList();
         }
 
-        
+
     }
-   
+
 }
