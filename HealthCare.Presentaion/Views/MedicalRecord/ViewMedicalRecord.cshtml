@@ -1,0 +1,17 @@
+﻿@model HealthCare.BusinessLogic.ViewModels.MedicalRecordViewModel
+@{
+    ViewData["Title"] = "ViewMedicalRecord";
+}
+
+<h1>ViewMedicalRecord</h1>
+
+
+<div>
+    <h4>Record ID: @Model.Id</h4>
+    <p>Patient Name: @Model.PatientName</p>
+    <p>Doctor Name: @Model.DoctorName</p>
+    <p>Date: @Model.AppointmentDate</p>
+    <p>Details: @Model.Description</p>
+    <p>Details: @Model.Prescription</p>
+</div>
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
