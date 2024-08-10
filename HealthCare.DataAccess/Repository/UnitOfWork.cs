@@ -9,10 +9,13 @@ namespace HealthCare.DataAccess.Repository
         public IPatientRepository Patients { get; }
 
         private readonly ApplicationDbContext _context;
+        public ITimeSlotRepository TimeSlots { get; private set; }
+
 
         public UnitOfWork(ApplicationDbContext context, IDoctorRepository doctors , IPatientRepository patients)
         {
             _context = context;
+            TimeSlots = new TimeSlotRepository(_context);
             Doctors = doctors;
             Patients = patients;
         }

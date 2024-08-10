@@ -15,5 +15,20 @@ namespace HealthCare.DataAccess.Repository
 
 
         public List<Doctor> GetAll() => _context.Doctors.ToList();
+
+        public Doctor GetById(int id) => _context.Doctors.FirstOrDefault(d => d.Id == id);
+
+        public void Update(Doctor doctor)
+        {
+            _context.Doctors.Update(doctor);
+        }
+        public void Delete(int id)
+        {
+            var doctor = _context.Doctors.FirstOrDefault(d => d.Id == id);
+            if (doctor != null)
+            {
+                _context.Doctors.Remove(doctor);
+            }
+        }
     }
 }
