@@ -4,7 +4,7 @@
     {
 
         IDoctorRepository Doctors { get; }
-
+        IMedicalRecordRepositery MedicalRecords { get; }
         int Compelete();
 
     }
