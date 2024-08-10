@@ -2,7 +2,9 @@ using HealthCare.BusinessLogic.Interfaces;
 using HealthCare.BusinessLogic.Services;
 using HealthCare.DataAccess.Context;
 using HealthCare.DataAccess.Interfaces;
+using HealthCare.DataAccess.Models;
 using HealthCare.DataAccess.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare.Presentaion
@@ -28,6 +30,8 @@ namespace HealthCare.Presentaion
             builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             builder.Services.AddScoped<IAppointmentServices, AppointmentServices>();
             builder.Services.AddAutoMapper(typeof(Program));
+            //Add Authentication
+            builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
             var app = builder.Build();
             
             // Configure the HTTP request pipeline.

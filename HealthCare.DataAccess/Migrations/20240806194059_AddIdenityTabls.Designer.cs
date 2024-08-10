@@ -4,6 +4,7 @@ using HealthCare.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthCare.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240806194059_AddIdenityTabls")]
+    partial class AddIdenityTabls
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,24 +117,6 @@ namespace HealthCare.DataAccess.Migrations
                     b.HasIndex("PatientId");
 
                     b.ToTable("Appointments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateTime = new DateTime(2024, 8, 10, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 1,
-                            PatientId = 1,
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateTime = new DateTime(2024, 8, 10, 11, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 2,
-                            PatientId = 2,
-                            Status = 0
-                        });
                 });
 
             modelBuilder.Entity("HealthCare.DataAccess.Models.Doctor", b =>
@@ -165,26 +150,6 @@ namespace HealthCare.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Doctors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 3,
-                            ContactNumber = "123-456-7890",
-                            FirstName = "John",
-                            LastName = "Doe",
-                            OfficeAddress = "123 Heart Lane",
-                            Specialization = "Cardiology"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ContactNumber = "987-654-3210",
-                            FirstName = "Jane",
-                            LastName = "Smith",
-                            OfficeAddress = "456 Brain Blvd",
-                            Specialization = "Neurology"
-                        });
                 });
 
             modelBuilder.Entity("HealthCare.DataAccess.Models.MedicalRecord", b =>
@@ -219,26 +184,6 @@ namespace HealthCare.DataAccess.Migrations
                     b.HasIndex("PatientID");
 
                     b.ToTable("MedicalRecords");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Date = new DateTime(2024, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Routine Checkup",
-                            DoctorID = 1,
-                            PatientID = 1,
-                            Prescription = "Take 1 tablet of aspirin daily"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Date = new DateTime(2024, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Migraine Treatment",
-                            DoctorID = 2,
-                            PatientID = 2,
-                            Prescription = "Rest and Hydrate"
-                        });
                 });
 
             modelBuilder.Entity("HealthCare.DataAccess.Models.Patient", b =>
@@ -275,28 +220,6 @@ namespace HealthCare.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Patients");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Adderss = "789 Elm Street",
-                            ContactNumber = "111-222-3333",
-                            DateOfBirth = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Alice",
-                            Gender = "Female",
-                            LastName = "Johnson"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Adderss = "321 Oak Avenue",
-                            ContactNumber = "444-555-6666",
-                            DateOfBirth = new DateTime(1985, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Bob",
-                            Gender = "Male",
-                            LastName = "Williams"
-                        });
                 });
 
             modelBuilder.Entity("HealthCare.DataAccess.Models.TimeSlot", b =>
@@ -321,29 +244,6 @@ namespace HealthCare.DataAccess.Migrations
                     b.HasIndex("DoctorID");
 
                     b.ToTable("TimeSlots");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DoctorID = 1,
-                            IsAvailable = true,
-                            StartTime = new DateTime(2024, 8, 10, 9, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DoctorID = 1,
-                            IsAvailable = true,
-                            StartTime = new DateTime(2024, 8, 10, 10, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DoctorID = 2,
-                            IsAvailable = true,
-                            StartTime = new DateTime(2024, 8, 10, 11, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
