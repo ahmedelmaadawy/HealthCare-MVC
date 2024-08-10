@@ -1,0 +1,42 @@
+﻿@using HealthCare.DataAccess.Models 
+@using HealthCare.DataAccess.Enums
+@model List<Appointment>
+ 
+    <p>your appointments</p>
+
+        <table class="table table-bordered table-hover text-center align-middle ">
+            <thead>
+                <tr>
+                     <th>time</th>
+                     <th>status</th>    
+                     <th>doctor name</th>
+                      <th>Specialization</th>
+                       <th>contact number</th>
+                        <th>OfficeAddress</th>
+                        <th>cancle it</th>
+                </tr>
+
+            </thead>
+    @foreach (var appointment in Model)
+    {
+        <tr>
+                <td>@appointment.DateTime</td>
+                    <td>@appointment.Status</td>
+                    <td>'@appointment.Doctor.FirstName'  ' @appointment.Doctor.LastName'</td>
+                        <td>@appointment.Doctor.Specialization</td>
+                            <td>@appointment.Doctor.ContactNumber</td>
+                                <td>@appointment.Doctor.OfficeAddress</td>
+                                <td>
+                @if (appointment.Status == AppointmentStatus.Scheduled)
+                {
+                                          <button class="btn btn-primary">
+                                                                            <a  class="text-white" style="text-decoration:none" href="/Appointment/CancleAppointment/@appointment.Id?day=@appointment.DateTime">cancle</a>
+                                        </button>
+                }
+
+                                </td>
+        </tr>
+    }
+</table>
+  
+
