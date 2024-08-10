@@ -10,10 +10,10 @@
 
     <div class="form-group">
         <label asp-for="StartTime">Start Time</label>
-        <input asp-for="StartTime" class="form-control" type="datetime-local" />
+        <input asp-for="StartTime" value="@DateTime.Now" class="form-control" type="datetime-local" />
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="mt-5 btn btn-primary">Save</button>
 </form>
 
 <style>

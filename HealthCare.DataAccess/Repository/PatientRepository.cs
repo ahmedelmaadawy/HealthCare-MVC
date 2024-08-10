@@ -1,15 +1,10 @@
 ﻿using HealthCare.DataAccess.Context;
 using HealthCare.DataAccess.Interfaces;
 using HealthCare.DataAccess.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthCare.DataAccess.Repository
 {
-    public class PatientRepository:IPatientRepository
+    public class PatientRepository : IPatientRepository
     {
         private readonly ApplicationDbContext _context;
         public PatientRepository(ApplicationDbContext context)
@@ -29,12 +24,12 @@ namespace HealthCare.DataAccess.Repository
 
         public void Update(Patient patient)
         {
-            _context.Patients.Update(patient);  // Entity Framework will handle the update
+            _context.Patients.Update(patient);
         }
 
         public void Delete(Patient patient)
         {
-            _context.Patients.Remove(patient);  // Entity Framework will handle the deletion
+            _context.Patients.Remove(patient);
         }
 
     }

@@ -3,13 +3,6 @@ using HealthCare.BusinessLogic.Interfaces;
 using HealthCare.BusinessLogic.ViewModels;
 using HealthCare.DataAccess.Interfaces;
 using HealthCare.DataAccess.Models;
-using HealthCare.Presentaion.ViewModels;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthCare.BusinessLogic.Services
 {
@@ -38,11 +31,7 @@ namespace HealthCare.BusinessLogic.Services
         public PatientToDisplayVM GetPatientById(int id)
         {
             var patient = _context.Patients.GetAll().FirstOrDefault(e => e.Id == id);
-            if (patient != null)
-            {
-                return _mapper.Map<PatientToDisplayVM>(patient);
-            }
-            return null;
+            return _mapper.Map<PatientToDisplayVM>(patient);
         }
 
         public void Update(Patient patient)
@@ -55,10 +44,10 @@ namespace HealthCare.BusinessLogic.Services
                 existingPatient.DateOfBirth = patient.DateOfBirth;
                 existingPatient.Gender = patient.Gender;
                 existingPatient.ContactNumber = patient.ContactNumber;
-                existingPatient.Adderss=patient.Adderss;
+                existingPatient.Adderss = patient.Adderss;
 
 
-                _context.Patients.Update(existingPatient);  // Now this method exists
+                _context.Patients.Update(existingPatient);
                 _context.Compelete();
             }
             else
@@ -72,7 +61,7 @@ namespace HealthCare.BusinessLogic.Services
             var patient = _context.Patients.GetAll().FirstOrDefault(e => e.Id == id);
             if (patient != null)
             {
-                _context.Patients.Delete(patient);  // Now this method exists
+                _context.Patients.Delete(patient);
                 _context.Compelete();
             }
             else

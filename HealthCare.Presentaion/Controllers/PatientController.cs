@@ -22,6 +22,14 @@ namespace HealthCare.Presentaion.Controllers
             return View(patients);
         }
 
+        public IActionResult Details(int id)
+        {
+            var patient = _service.GetPatientById(id);
+            return View(patient);
+        }
+
+        [HttpGet]
+
         public IActionResult Create()
         {
             return View();
@@ -37,7 +45,7 @@ namespace HealthCare.Presentaion.Controllers
             }
             return View(patient);
         }
-
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             var patient = _service.GetPatientById(id);

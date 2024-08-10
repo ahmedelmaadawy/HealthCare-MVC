@@ -1,4 +1,4 @@
-﻿@model HealthCare.DataAccess.Models.Patient
+﻿@model PatientToDisplayVM
 
 @{
     ViewData["Title"] = "Edit";
@@ -13,9 +13,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
                 <input asp-for="Id" class="form-control" type="hidden"/>
-                <span asp-validation-for="Id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
