@@ -25,9 +25,11 @@ namespace HealthCare.Presentaion
             builder.Services.AddScoped<IDoctorService, DoctorService>();
             builder.Services.AddScoped<IPatientRepository, PatientRepository>();
             builder.Services.AddScoped<IPatientService, PatientSevice>();
+            builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+            builder.Services.AddScoped<IAppointmentServices, AppointmentServices>();
             builder.Services.AddAutoMapper(typeof(Program));
             var app = builder.Build();
-
+            
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {

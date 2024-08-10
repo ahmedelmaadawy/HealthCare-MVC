@@ -2,6 +2,7 @@
 {
     public interface IUnitOfWork : IDisposable
     {
+        IAppointmentRepository Appointments { get; }
         ITimeSlotRepository TimeSlots { get; }
 
         IDoctorRepository Doctors { get; }
