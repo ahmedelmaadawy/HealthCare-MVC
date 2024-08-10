@@ -20,9 +20,11 @@ namespace HealthCare.Presentaion
                 options.UseSqlServer(builder.Configuration.GetConnectionString("default"));
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
-            builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
             builder.Services.AddScoped<IDoctorService, DoctorService>();
+            builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+            builder.Services.AddScoped<IPatientService, PatientSevice>();
             builder.Services.AddAutoMapper(typeof(Program));
             var app = builder.Build();
 

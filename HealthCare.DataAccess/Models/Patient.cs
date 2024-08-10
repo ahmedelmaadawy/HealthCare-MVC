@@ -19,7 +19,5 @@ namespace HealthCare.DataAccess.Models
 
         public virtual List<Appointment>? Appointments { get; set; }
         public virtual List<MedicalRecord>? MedicalReccords { get; set; }
-
-
     }
 }
