@@ -22,7 +22,7 @@ namespace HealthCare.Presentaion.Controllers
             return View(patients);
         }
 
-        public IActionResult Add()
+        public IActionResult Create()
         {
             return View();
         }
@@ -49,7 +49,7 @@ namespace HealthCare.Presentaion.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Patient patient)
+        public IActionResult Edit(Patient patient)
         {
             if (ModelState.IsValid)
             {

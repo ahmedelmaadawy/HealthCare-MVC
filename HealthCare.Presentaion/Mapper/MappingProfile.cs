@@ -10,7 +10,7 @@ namespace HealthCare.Presentaion.Mapper
         public MappingProfile()
         {
             CreateMap<Doctor, DoctorToDisplayVM>().ForMember(d => d.FullName, opt => opt.MapFrom(x => string.Join(' ', x.FirstName, x.LastName)));
-            CreateMap<Patient, PatientToDisplayVM>().ForMember(p=> p.Address,opt =>opt.MapFrom(x=>x.Address));
+            CreateMap<Patient, PatientToDisplayVM>();
         }
 
 

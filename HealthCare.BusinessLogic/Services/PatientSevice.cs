@@ -55,7 +55,8 @@ namespace HealthCare.BusinessLogic.Services
                 existingPatient.DateOfBirth = patient.DateOfBirth;
                 existingPatient.Gender = patient.Gender;
                 existingPatient.ContactNumber = patient.ContactNumber;
-                existingPatient.Address = patient.Address;
+                existingPatient.Adderss=patient.Adderss;
+
 
                 _context.Patients.Update(existingPatient);  // Now this method exists
                 _context.Compelete();
