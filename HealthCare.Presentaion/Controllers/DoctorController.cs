@@ -1,9 +1,6 @@
 ﻿using HealthCare.BusinessLogic.Interfaces;
-using HealthCare.BusinessLogic.Services;
 using HealthCare.BusinessLogic.ViewModels;
-using HealthCare.DataAccess.Interfaces;
 using HealthCare.DataAccess.Models;
-using HealthCare.DataAccess.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthCare.Presentaion.Controllers
@@ -43,8 +40,7 @@ namespace HealthCare.Presentaion.Controllers
             }
             else
             {
-                return View("Create",doctor);
-
+                return View("Create", doctor);
             }
         }
         //----------------------------------------------------------------
@@ -56,20 +52,22 @@ namespace HealthCare.Presentaion.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveEdit(Doctor doctor)
+        public IActionResult Edit(Doctor doctor)
         {
             if (ModelState.IsValid)
             {
-                var doc = new Doctor() { FirstName = doctor.FirstName,
+                var doc = new Doctor()
+                {
+                    FirstName = doctor.FirstName,
                     LastName = doctor.LastName,
                     Specialization = doctor.Specialization,
                     OfficeAddress = doctor.OfficeAddress,
                     ContactNumber = doctor.ContactNumber
                 };
-                _service.Update(doctor.Id ,doctor);
+                _service.Update(doctor.Id, doctor);
                 return RedirectToAction("Index");
             }
-            return View("Edit",doctor);
+            return View("Edit", doctor);
         }
 
         [HttpPost]
@@ -99,7 +97,7 @@ namespace HealthCare.Presentaion.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult SaveTimeSlot(TimeSlotViewModel model)
+        public IActionResult AddTimeSlot(TimeSlotViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +105,7 @@ namespace HealthCare.Presentaion.Controllers
                 {
                     DoctorID = model.DoctorID,
                     StartTime = model.StartTime,
-                    IsAvailable = model.IsAvailable
+                    IsAvailable = true,
                 };
 
                 _service.AddTimeSlot(timeSlot);
