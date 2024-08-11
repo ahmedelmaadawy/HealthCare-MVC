@@ -31,9 +31,14 @@ namespace HealthCare.Presentaion
             builder.Services.AddScoped<IAppointmentServices, AppointmentServices>();
             builder.Services.AddAutoMapper(typeof(Program));
             //Add Authentication
-            builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+
+            }).AddEntityFrameworkStores<ApplicationDbContext>();
             var app = builder.Build();
-            
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -47,7 +52,7 @@ namespace HealthCare.Presentaion
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Doctor}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=Login}/{id?}");
 
             app.Run();
         }

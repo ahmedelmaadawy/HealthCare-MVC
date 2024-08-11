@@ -15,5 +15,7 @@ namespace HealthCare.BusinessLogic.ViewModels
         public string? ConfirmPassword { get; set; }
         [Required]
         public string? Email { get; set; }
+        [Required]
+        public string? Role { get; set; }
     }
 }
