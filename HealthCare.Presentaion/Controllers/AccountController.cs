@@ -32,7 +32,24 @@ namespace HealthCare.Presentaion.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Doctor");
+                    if (userVm.Role == "Doctor")
+                    {
+                        var res = await _userManager.AddToRoleAsync(user, "Doctor");
+                        if (res.Succeeded)
+                        {
+                            return RedirectToAction("Create", "Doctor");
+                        }
+                    }
+                    else if (userVm.Role == "Patient")
+                    {
+                        var res = await _userManager.AddToRoleAsync(user, "Patient");
+                        if (res.Succeeded)
+                            return RedirectToAction("Create", "Patient");
+                    }
+                    else
+                    {
+                        throw new Exception("erron in role");
+                    }
                 }
                 else
                 {

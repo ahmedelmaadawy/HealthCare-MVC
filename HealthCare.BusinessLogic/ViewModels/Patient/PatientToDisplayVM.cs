@@ -1,4 +1,4 @@
-﻿namespace HealthCare.BusinessLogic.ViewModels
+﻿namespace HealthCare.BusinessLogic.ViewModels.Patient
 {
     public class PatientToDisplayVM
     {

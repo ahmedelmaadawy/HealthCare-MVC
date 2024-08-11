@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HealthCare.BusinessLogic.Interfaces;
-using HealthCare.BusinessLogic.ViewModels;
+using HealthCare.BusinessLogic.ViewModels.Patient;
 using HealthCare.DataAccess.Interfaces;
 using HealthCare.DataAccess.Models;
 
@@ -28,10 +28,10 @@ namespace HealthCare.BusinessLogic.Services
             return patientsVM;
         }
 
-        public PatientToDisplayVM GetPatientById(int id)
+        public Patient GetPatientById(int id)
         {
-            var patient = _context.Patients.GetAll().FirstOrDefault(e => e.Id == id);
-            return _mapper.Map<PatientToDisplayVM>(patient);
+            return _context.Patients.GetAll().FirstOrDefault(e => e.Id == id);
+
         }
 
         public void Update(Patient patient)
@@ -61,6 +61,7 @@ namespace HealthCare.BusinessLogic.Services
             var patient = _context.Patients.GetAll().FirstOrDefault(e => e.Id == id);
             if (patient != null)
             {
+
                 _context.Patients.Delete(patient);
                 _context.Compelete();
             }
