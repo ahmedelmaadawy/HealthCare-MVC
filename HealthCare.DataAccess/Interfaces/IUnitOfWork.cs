@@ -7,6 +7,7 @@
         IDoctorRepository Doctors { get; }
         IPatientRepository Patients { get; }
 
+        IMedicalRecordRepositery MedicalRecords { get; }
         int Compelete();
 
     }
