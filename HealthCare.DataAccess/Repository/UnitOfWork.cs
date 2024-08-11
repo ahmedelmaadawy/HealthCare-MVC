@@ -15,7 +15,7 @@ namespace HealthCare.DataAccess.Repository
         public ITimeSlotRepository TimeSlots { get; private set; }
 
 
-        public UnitOfWork(ApplicationDbContext context, IDoctorRepository doctors, IMedicalRecordRepositery medicalRecords)
+        public UnitOfWork(ApplicationDbContext context, IDoctorRepository doctors, IMedicalRecordRepositery medicalRecords, IPatientRepository patients, IAppointmentRepository appointments)
         {
             _context = context;
             TimeSlots = new TimeSlotRepository(_context);

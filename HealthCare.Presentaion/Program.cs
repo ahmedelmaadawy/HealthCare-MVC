@@ -24,12 +24,17 @@ namespace HealthCare.Presentaion
             });
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
-            builder.Services.AddScoped<IDoctorService, DoctorService>();
-            builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
             builder.Services.AddScoped<IPatientRepository, PatientRepository>();
-            builder.Services.AddScoped<IPatientService, PatientSevice>();
             builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+            builder.Services.AddScoped<IMedicalRecordRepositery, MedicalRecordRepository>();
+            builder.Services.AddScoped<ITimeSlotRepository, TimeSlotRepository>();
+
             builder.Services.AddScoped<IAppointmentServices, AppointmentServices>();
+            builder.Services.AddScoped<IPatientService, PatientSevice>();
+            builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
+            builder.Services.AddScoped<IDoctorService, DoctorService>();
+
+
             builder.Services.AddAutoMapper(typeof(Program));
             //Add Authentication
             builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
