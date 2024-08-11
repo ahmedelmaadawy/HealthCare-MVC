@@ -1,9 +1,11 @@
 ﻿using HealthCare.BusinessLogic.Interfaces;
 using HealthCare.BusinessLogic.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthCare.Presentaion.Controllers
 {
+    [Authorize]
     public class MedicalRecordController : Controller
     {
         private readonly IMedicalRecordService _service;
@@ -12,30 +14,33 @@ namespace HealthCare.Presentaion.Controllers
         {
             _service = service;
         }
+        [Authorize(Roles = "Doctor")]
         [HttpGet]
-        public IActionResult AddMedicalRecord() {
+        public IActionResult Create()
+        {
             return View();
         }
-
+        [Authorize(Roles = "Doctor")]
         [HttpPost]
-        public IActionResult AddMedicalRecord(AddingMedicalRecordVM model)
+        public IActionResult Create(AddingMedicalRecordVM model)
         {
             if (ModelState.IsValid)
             {
                 _service.CreateMedicalRecord(model);
-                return RedirectToAction("Index","Doctor"); 
+                return RedirectToAction("Index", "Doctor");
             }
             return View(model);
         }
-      
+
 
         [HttpGet]
-        public IActionResult ViewMedicalRecord(int id)
+        public IActionResult Details(int id)
         {
             var record = _service.GetMedicalRecordById(id);
             return View(record);
         }
 
+        [Authorize(Roles = "Doctor")]
         [HttpGet]
         public IActionResult ViewDoctorMedicalRecords(int doctorId)
         {
@@ -44,6 +49,7 @@ namespace HealthCare.Presentaion.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Patient")]
         public IActionResult ViewPatientMedicalRecords(int patientId)
         {
             var records = _service.GetMedicalRecordsByPatient(patientId);
