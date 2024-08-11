@@ -16,6 +16,9 @@ namespace HealthCare.DataAccess.Models
         [Required]
         public string? ContactNumber { get; set; }
         public string? Adderss { get; set; }
+        [Required]
+        public string UserId { get; set; }
+        public virtual AppUser? User { get; set; }
 
         public virtual List<Appointment>? Appointments { get; set; }
         public virtual List<MedicalRecord>? MedicalReccords { get; set; }

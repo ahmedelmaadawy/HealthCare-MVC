@@ -15,8 +15,10 @@ namespace HealthCare.DataAccess.Models
         public string? ContactNumber { get; set; }
         [Required]
         public string? OfficeAddress { get; set; }
-
+        [Required]
+        public string? UserId { get; set; }
         public List<TimeSlot>? AvailableTimeSlots { get; set; }
+        public virtual AppUser User { get; set; }
         public virtual ICollection<MedicalRecord>? MedicalRecords { get; set; }
         public virtual ICollection<Appointment>? Appointments { get; set; }
     }
