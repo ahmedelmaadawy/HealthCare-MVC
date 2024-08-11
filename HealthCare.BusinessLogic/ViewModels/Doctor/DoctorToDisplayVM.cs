@@ -1,7 +1,4 @@
-﻿using HealthCare.DataAccess.Models;
-using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace HealthCare.BusinessLogic.ViewModels.Doctor
 {
@@ -14,6 +11,6 @@ namespace HealthCare.BusinessLogic.ViewModels.Doctor
         public string ContactNumber { get; set; }
         public string OfficeAddress { get; set; }
 
-        public List<TimeSlot> AvailableTimeSlots { get; set; }
+        public List<HealthCare.DataAccess.Models.TimeSlot> AvailableTimeSlots { get; set; }
     }
 }

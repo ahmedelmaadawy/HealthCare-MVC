@@ -5,20 +5,12 @@ namespace HealthCare.BusinessLogic.Interfaces
 {
     public interface IAppointmentServices
     {
-        public List<Appointment> GetAllAppointmentsForThatDay(int doctorId, DateTime day);
-
-
-        public void CompletedAppointment(int id);
-
+        public List<Appointment> GetAllByDay(int doctorId, DateTime day);
+        public void CompletedAppointment(int Id);
         public void BookAppointment(Appointment appointment);
-
-        public void ChangeAppointment(Appointment appointment);
-
+        public void Update(Appointment appointment);
         public void CancleAppointment(int ID);
-
-        public List<Appointment> GetAllAppointmentsForThatPatient(int patientId);
-
-
+        public List<Appointment> GetByPatientId(int patientId);
     }
 }
 

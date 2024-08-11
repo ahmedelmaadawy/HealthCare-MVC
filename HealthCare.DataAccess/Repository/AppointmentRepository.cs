@@ -16,41 +16,31 @@ namespace HealthCare.DataAccess.Repository
             _context = context;
         }
 
-        public List<Appointment> GetAppointmentByDoctorId(int doctorId)
+        public List<Appointment> GetByDoctorId(int doctorId)
         {
             var appointments = _context.Appointments.Where(x => x.DoctorId == doctorId).Include(a => a.Patient).ToList();
             return appointments;
         }
 
-        public void BookAppointment(Appointment appointment)
+        public void Create(Appointment appointment)
         {
             appointment.Status = AppointmentStatus.Scheduled;
             _context.Appointments.Add(appointment);
         }
 
-        public void ChangeAppointment(Appointment appointment)
+        public void Update(Appointment appointment)
         {
             _context.Appointments.Update(appointment);
         }
-        public void CancleAppointment(int ID)
-        {
-            var appointment = _context.Appointments.FirstOrDefault(x => x.Id == ID);
-            appointment.Status = AppointmentStatus.Canceled;
-            ChangeAppointment(appointment);
-        }
-
-        public void CompletedAppointment(int id)
-        {
-            var appointment = _context.Appointments.FirstOrDefault(x => x.Id == id);
-            appointment.Status = AppointmentStatus.Completed;
-            ChangeAppointment(appointment);
-        }
-        public List<Appointment> GetAllAppointmentsForThatPatient(int patientId)
+        public List<Appointment> GetByPatientId(int patientId)
         {
             return _context.Appointments.Where(x => x.PatientId == patientId).Include(x => x.Doctor).ToList();
         }
 
-
+        public Appointment GetById(int id)
+        {
+            return _context.Appointments.Where(a => a.Id == id).FirstOrDefault();
+        }
     }
 
 }

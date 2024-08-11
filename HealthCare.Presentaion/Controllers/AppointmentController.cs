@@ -10,19 +10,19 @@ namespace HealthCare.Presentaion.Controllers
         {
             _services = appointmentServices;
         }
-        public IActionResult GetAllAppointmentsForThatDay(int doctorID, DateTime day)
+        public IActionResult GetAllByDay(int doctorID, DateTime day)
         {
-            var model = _services.GetAllAppointmentsForThatDay(doctorID, day);
+            var model = _services.GetAllByDay(doctorID, day);
             return View(model);
         }
         public IActionResult CompletedAppointment(int Id, DateTime day, int doctorId)
         {
             _services.CompletedAppointment(Id);
-            return RedirectToAction(nameof(GetAllAppointmentsForThatDay), new { doctorID = doctorId, Day = day });
+            return RedirectToAction(nameof(GetAllByDay), new { doctorID = doctorId, Day = day });
         }
         public IActionResult GetAllAppointmentsForThatPatient(int ID)
         {
-            var model = _services.GetAllAppointmentsForThatPatient(ID);
+            var model = _services.GetByPatientId(ID);
             return View(model);
 
         }

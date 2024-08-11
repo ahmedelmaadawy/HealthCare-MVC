@@ -1,11 +1,6 @@
 ﻿using HealthCare.DataAccess.Context;
 using HealthCare.DataAccess.Interfaces;
 using HealthCare.DataAccess.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthCare.DataAccess.Repository
 {
@@ -22,6 +17,9 @@ namespace HealthCare.DataAccess.Repository
         {
             _context.TimeSlots.Add(timeSlot);
         }
-
+        public void Delete(TimeSlot timeSlot)
+        {
+            _context.TimeSlots.Remove(timeSlot);
+        }
     }
 }
