@@ -1,11 +1,10 @@
-﻿using HealthCare.Presentaion.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthCare.BusinessLogic.ViewModels
+namespace HealthCare.BusinessLogic.ViewModels.Doctor
 {
     public class DoctorIndexVM
     {

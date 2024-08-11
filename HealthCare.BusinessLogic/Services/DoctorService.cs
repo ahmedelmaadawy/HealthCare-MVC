@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using HealthCare.BusinessLogic.Interfaces;
+using HealthCare.BusinessLogic.ViewModels.Doctor;
 using HealthCare.DataAccess.Interfaces;
 using HealthCare.DataAccess.Models;
 using HealthCare.DataAccess.Repository;
-using HealthCare.Presentaion.ViewModels;
 using System.Runtime.CompilerServices;
 
 namespace HealthCare.BusinessLogic.Services

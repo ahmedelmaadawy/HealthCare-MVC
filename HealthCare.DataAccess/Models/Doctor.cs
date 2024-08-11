@@ -18,7 +18,7 @@ namespace HealthCare.DataAccess.Models
         [Required]
         public string? UserId { get; set; }
         public List<TimeSlot>? AvailableTimeSlots { get; set; }
-        public virtual AppUser User { get; set; }
+        public virtual AppUser? User { get; set; }
         public virtual ICollection<MedicalRecord>? MedicalRecords { get; set; }
         public virtual ICollection<Appointment>? Appointments { get; set; }
     }

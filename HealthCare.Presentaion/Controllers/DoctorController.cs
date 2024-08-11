@@ -1,10 +1,13 @@
 ﻿using HealthCare.BusinessLogic.Interfaces;
 using HealthCare.BusinessLogic.ViewModels;
 using HealthCare.DataAccess.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace HealthCare.Presentaion.Controllers
 {
+    [Authorize]
     public class DoctorController : Controller
     {
         private readonly IDoctorService _service;
@@ -12,6 +15,7 @@ namespace HealthCare.Presentaion.Controllers
         {
             _service = service;
         }
+        [AllowAnonymous]
         public IActionResult Index(string searchString)
         {
             var doctors = _service.GetAll();
@@ -24,19 +28,23 @@ namespace HealthCare.Presentaion.Controllers
             ViewData["CurrentFilter"] = searchString;
             return View(doctors);
         }
+        [Authorize(Roles = "Doctor")]
 
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
+        [Authorize(Roles = "Doctor")]
         [HttpPost]
         public IActionResult Create(Doctor doctor)
         {
+            doctor.UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+
             if (ModelState.IsValid)
             {
                 _service.Add(doctor);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = doctor.Id });
             }
             else
             {
@@ -44,12 +52,15 @@ namespace HealthCare.Presentaion.Controllers
             }
         }
         //----------------------------------------------------------------
+        [Authorize(Roles = "Doctor")]
+
         [HttpGet]
         public IActionResult Edit(int id)
         {
             var doctor = _service.GetById(id);
             return View(doctor);
         }
+        [Authorize(Roles = "Doctor")]
 
         [HttpPost]
         public IActionResult Edit(Doctor doctor)
@@ -86,15 +97,22 @@ namespace HealthCare.Presentaion.Controllers
             }
             return View(doctor);
         }
-
+        [Authorize(Roles = "Doctor")]
         [HttpGet]
         public IActionResult AddTimeSlot(int doctorId)
         {
-            var model = new TimeSlotViewModel
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            var doctor = _service.GetById(doctorId);
+            if (userId == doctor.UserId)
             {
-                DoctorID = doctorId
-            };
-            return View(model);
+                var model = new TimeSlotViewModel
+                {
+                    DoctorID = doctorId
+                };
+
+                return View(model);
+            }
+            return Unauthorized();
         }
         [HttpPost]
         public IActionResult AddTimeSlot(TimeSlotViewModel model)

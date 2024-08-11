@@ -1,5 +1,5 @@
-﻿using HealthCare.DataAccess.Models;
-using HealthCare.Presentaion.ViewModels;
+﻿using HealthCare.BusinessLogic.ViewModels.Doctor;
+using HealthCare.DataAccess.Models;
 using System.Collections.Generic;
 
 

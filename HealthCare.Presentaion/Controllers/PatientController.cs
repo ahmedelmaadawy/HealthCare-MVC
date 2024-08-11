@@ -33,12 +33,13 @@ namespace HealthCare.Presentaion.Controllers
         }
 
         [HttpGet]
-
+        [Authorize(Roles = "Patient")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Patient")]
         [HttpPost]
         public IActionResult Create(PatientToCreateVM patientVm)
         {

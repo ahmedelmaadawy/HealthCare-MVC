@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using HealthCare.BusinessLogic.ViewModels;
+using HealthCare.BusinessLogic.ViewModels.Doctor;
 using HealthCare.BusinessLogic.ViewModels.Patient;
 using HealthCare.DataAccess.Models;
-using HealthCare.Presentaion.ViewModels;
 
 namespace HealthCare.Presentaion.Mapper
 {

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 
-namespace HealthCare.Presentaion.ViewModels
+namespace HealthCare.BusinessLogic.ViewModels.Doctor
 {
     public class DoctorToDisplayVM
     {
