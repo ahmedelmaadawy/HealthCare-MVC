@@ -1,5 +1,4 @@
 ﻿using HealthCare.BusinessLogic.Interfaces;
-using HealthCare.BusinessLogic.ViewModels;
 using HealthCare.DataAccess.Models;
 using HealthCare.DataAccess.Interfaces;
 using System;
@@ -8,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using HealthCare.BusinessLogic.ViewModels.MedicalRecord;
 
 namespace HealthCare.BusinessLogic.Services
 {

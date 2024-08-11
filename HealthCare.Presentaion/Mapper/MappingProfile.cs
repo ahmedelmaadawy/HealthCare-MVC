@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using HealthCare.BusinessLogic.ViewModels;
 using HealthCare.BusinessLogic.ViewModels.Doctor;
+using HealthCare.BusinessLogic.ViewModels.Identity;
 using HealthCare.BusinessLogic.ViewModels.Patient;
 using HealthCare.DataAccess.Models;
 

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using HealthCare.BusinessLogic.ViewModels;
+using HealthCare.BusinessLogic.ViewModels.Identity;
 using HealthCare.DataAccess.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

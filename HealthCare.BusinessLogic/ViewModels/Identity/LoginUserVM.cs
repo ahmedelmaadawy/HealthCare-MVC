@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HealthCare.BusinessLogic.ViewModels
+namespace HealthCare.BusinessLogic.ViewModels.Identity
 {
     public class LoginUserVM
     {

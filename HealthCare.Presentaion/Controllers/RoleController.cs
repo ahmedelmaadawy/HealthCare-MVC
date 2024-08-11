@@ -1,4 +1,4 @@
-﻿using HealthCare.BusinessLogic.ViewModels;
+﻿using HealthCare.BusinessLogic.ViewModels.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

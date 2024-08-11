@@ -1,4 +1,4 @@
-﻿using HealthCare.BusinessLogic.ViewModels;
+﻿using HealthCare.BusinessLogic.ViewModels.MedicalRecord;
 using HealthCare.DataAccess.Models;
 using System;
 using System.Collections.Generic;

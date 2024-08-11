@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthCare.BusinessLogic.ViewModels
+namespace HealthCare.BusinessLogic.ViewModels.TimeSlot
 {
     public class TimeSlotViewModel
     {

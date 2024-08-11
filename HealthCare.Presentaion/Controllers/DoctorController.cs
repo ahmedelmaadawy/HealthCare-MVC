@@ -1,5 +1,5 @@
 ﻿using HealthCare.BusinessLogic.Interfaces;
-using HealthCare.BusinessLogic.ViewModels;
+using HealthCare.BusinessLogic.ViewModels.TimeSlot;
 using HealthCare.DataAccess.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,5 +1,5 @@
 ﻿using HealthCare.BusinessLogic.Interfaces;
-using HealthCare.BusinessLogic.ViewModels;
+using HealthCare.BusinessLogic.ViewModels.MedicalRecord;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
