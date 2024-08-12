@@ -48,7 +48,7 @@ namespace HealthCare.Presentaion.Controllers
                 var patient = _mapper.Map<Patient>(patientVm);
                 patient.UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
                 _service.Add(patient);
-                return RedirectToAction("Index", "Doctor");
+                return RedirectToAction("Logout", "Account");
             }
             return View(patientVm);
         }

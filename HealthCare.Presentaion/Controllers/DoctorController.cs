@@ -18,6 +18,7 @@ namespace HealthCare.Presentaion.Controllers
         [AllowAnonymous]
         public IActionResult Index(string searchString)
         {
+
             var doctors = _service.GetAll();
 
             if (!string.IsNullOrEmpty(searchString))
@@ -44,7 +45,7 @@ namespace HealthCare.Presentaion.Controllers
             if (ModelState.IsValid)
             {
                 _service.Add(doctor);
-                return RedirectToAction("Details", new { id = doctor.Id });
+                return RedirectToAction("Logout", "Account");
             }
             else
             {

@@ -13,7 +13,7 @@ namespace HealthCare.Presentaion.Controllers
         public IActionResult GetAllByDay(int doctorID, DateTime day)
         {
             var model = _services.GetAllByDay(doctorID, day);
-            return View(model);
+            return View("GetAllAppointmentsForThatDay", model);
         }
         public IActionResult CompletedAppointment(int Id, DateTime day, int doctorId)
         {
@@ -31,7 +31,6 @@ namespace HealthCare.Presentaion.Controllers
             _services.CancleAppointment(Id);
             return RedirectToAction(nameof(GetAllAppointmentsForThatPatient), new { id = Id });
         }
-
 
     }
 }

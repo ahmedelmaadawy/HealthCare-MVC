@@ -36,7 +36,7 @@ namespace HealthCare.Presentaion.Controllers
                 if (result.Succeeded)
                 {
                     var res = await _userManager.AddToRoleAsync(user, userVm.Role);
-                    await _signInManager.SignInAsync(user, false);
+                    //  await _signInManager.SignInAsync(user, false);
 
                     if (res.Succeeded)
                     {
@@ -93,8 +93,20 @@ namespace HealthCare.Presentaion.Controllers
                         {
                             return RedirectToAction("Create", "Patient");
                         }
-                        else
+                        else if (User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value == "Patient")
                         {
+                            List<Claim> claims = new List<Claim>();
+                            claims.Add(new Claim("PatientId", $"{patient.Id}"));
+                            await _signInManager.SignInWithClaimsAsync(user, false, claims);
+
+                            return RedirectToAction("Index", "Doctor");
+                        }
+                        else if (User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value == "Doctor")
+                        {
+                            List<Claim> claims = new List<Claim>();
+                            claims.Add(new Claim("DoctorId", $"{doctor.Id}"));
+                            await _signInManager.SignInWithClaimsAsync(user, false, claims);
+
                             return RedirectToAction("Index", "Doctor");
                         }
 
