@@ -94,17 +94,20 @@ namespace HealthCare.Presentaion.Controllers
         {
             var model = new TimeSlotViewModel
             {
-                DoctorID = doctorId
+                DoctorID = doctorId,
+                StartTime = DateTime.Now
             };
             return View(model);
         }
         [HttpPost]
         public IActionResult SaveTimeSlot(TimeSlotViewModel model)
         {
+
             if (ModelState.IsValid)
             {
                 var timeSlot = new TimeSlot
                 {
+
                     DoctorID = model.DoctorID,
                     StartTime = model.StartTime,
                     IsAvailable = model.IsAvailable

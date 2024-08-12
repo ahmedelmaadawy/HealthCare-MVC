@@ -11,6 +11,7 @@ namespace HealthCare.Presentaion.ViewModels
         [Display(Name = "Full Name")]
         public string FullName { get; set; }
         public string Specialization { get; set; }
+        [MaxLength(11)]
         public string ContactNumber { get; set; }
         public string OfficeAddress { get; set; }
 
