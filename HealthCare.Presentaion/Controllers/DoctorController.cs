@@ -28,8 +28,8 @@ namespace HealthCare.Presentaion.Controllers
             ViewData["CurrentFilter"] = searchString;
             return View(doctors);
         }
-        [Authorize(Roles = "Doctor")]
 
+        [Authorize(Roles = "Doctor")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -62,19 +62,13 @@ namespace HealthCare.Presentaion.Controllers
         }
         [Authorize(Roles = "Doctor")]
 
+        [Authorize(Roles = "Doctor")]
         [HttpPost]
         public IActionResult Edit(Doctor doctor)
         {
             if (ModelState.IsValid)
             {
-                var doc = new Doctor()
-                {
-                    FirstName = doctor.FirstName,
-                    LastName = doctor.LastName,
-                    Specialization = doctor.Specialization,
-                    OfficeAddress = doctor.OfficeAddress,
-                    ContactNumber = doctor.ContactNumber
-                };
+
                 _service.Update(doctor.Id, doctor);
                 return RedirectToAction("Index");
             }

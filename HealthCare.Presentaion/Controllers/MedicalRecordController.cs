@@ -42,17 +42,17 @@ namespace HealthCare.Presentaion.Controllers
 
         [Authorize(Roles = "Doctor")]
         [HttpGet]
-        public IActionResult ViewDoctorMedicalRecords(int doctorId)
+        public IActionResult ViewDoctorMedicalRecords(int id)
         {
-            var records = _service.GetMedicalRecordsByDoctor(doctorId);
+            var records = _service.GetMedicalRecordsByDoctor(id);
             return View(records);
         }
 
         [HttpGet]
         [Authorize(Roles = "Patient")]
-        public IActionResult ViewPatientMedicalRecords(int patientId)
+        public IActionResult ViewPatientMedicalRecords(int id)
         {
-            var records = _service.GetMedicalRecordsByPatient(patientId);
+            var records = _service.GetMedicalRecordsByPatient(id);
             return View(records);
         }
     }

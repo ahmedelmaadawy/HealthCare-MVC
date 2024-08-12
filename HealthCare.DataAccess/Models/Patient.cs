@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HealthCare.DataAccess.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace HealthCare.DataAccess.Models
 {
@@ -12,7 +13,7 @@ namespace HealthCare.DataAccess.Models
         [Required]
         public DateTime? DateOfBirth { get; set; }
         [Required]
-        public string? Gender { get; set; }
+        public Gender Gender { get; set; }
         [Required]
         public string? ContactNumber { get; set; }
         public string? Adderss { get; set; }

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using HealthCare.BusinessLogic.ViewModels.Identity;
+using HealthCare.DataAccess.Interfaces;
 using HealthCare.DataAccess.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace HealthCare.Presentaion.Controllers
 {
@@ -11,11 +13,13 @@ namespace HealthCare.Presentaion.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
         private readonly SignInManager<AppUser> _signInManager;
-        public AccountController(UserManager<AppUser> userManager, IMapper mapper, SignInManager<AppUser> signinManager)
+        private readonly IUnitOfWork _context;
+        public AccountController(UserManager<AppUser> userManager, IMapper mapper, SignInManager<AppUser> signinManager, IUnitOfWork context)
         {
             _userManager = userManager;
             _mapper = mapper;
             _signInManager = signinManager;
+            _context = context;
         }
         [HttpGet]
         public IActionResult Register()
@@ -31,36 +35,36 @@ namespace HealthCare.Presentaion.Controllers
                 IdentityResult result = await _userManager.CreateAsync(user, userVm.Password);
                 if (result.Succeeded)
                 {
+                    var res = await _userManager.AddToRoleAsync(user, userVm.Role);
                     await _signInManager.SignInAsync(user, false);
-                    if (userVm.Role == "Doctor")
+
+                    if (res.Succeeded)
                     {
-                        var res = await _userManager.AddToRoleAsync(user, "Doctor");
-                        if (res.Succeeded)
+
+                        if (userVm.Role == "Doctor")
                         {
                             return RedirectToAction("Create", "Doctor");
                         }
-                    }
-                    else if (userVm.Role == "Patient")
-                    {
-                        var res = await _userManager.AddToRoleAsync(user, "Patient");
-                        if (res.Succeeded)
+                        else if (userVm.Role == "Patient")
+                        {
                             return RedirectToAction("Create", "Patient");
+                        }
+                        else
+                        {
+                            throw new Exception("erron in role");
+                        }
                     }
-                    else
-                    {
-                        throw new Exception("erron in role");
-                    }
-                }
-                else
-                {
+
                     foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError("Identity", error.Description);
                     }
                     return View(userVm);
+
                 }
             }
             return View(userVm);
+
         }
         [HttpGet]
         public IActionResult Login()
@@ -79,7 +83,21 @@ namespace HealthCare.Presentaion.Controllers
                     if (result)
                     {
                         await _signInManager.SignInAsync(user, false);
-                        return RedirectToAction("Index", "Doctor");
+                        var doctor = _context.Doctors.GetAll().FirstOrDefault(d => d.UserId == user.Id);
+                        var patient = _context.Patients.GetAll().FirstOrDefault(d => d.UserId == user.Id);
+                        if (doctor == null && User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value == "Doctor")
+                        {
+                            return RedirectToAction("Create", "Doctor");
+                        }
+                        else if (patient == null && User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value == "Patient")
+                        {
+                            return RedirectToAction("Create", "Patient");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Doctor");
+                        }
+
                     }
                 }
                 ModelState.AddModelError("authentication", "Email Or Password Wrong");
