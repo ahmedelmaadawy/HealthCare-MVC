@@ -60,6 +60,7 @@ namespace HealthCare.Presentaion
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Account}/{action=Login}/{id?}");
+            AppDbIntializer.SeedRolesAsync(app).Wait();
 
             app.Run();
         }
