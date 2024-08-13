@@ -43,8 +43,9 @@
                             }
                             else if (User.IsInRole("Patient"))
                             {
-                               // <a asp-action="GetAllAppointmentsForThatPatient" asp-controller="Appointment" asp-route-Id="@User?.Claims?.FirstOrDefault(c => c.Type == "PatientId").Value" class="nav-link text-white">Appointments</a>
-                                //<a asp-action="ViewPatientMedicalRecords" asp-controller="MedicalRecord" asp-route-Id="@User?.Claims?.FirstOrDefault(c => c.Type == "PatientId").Value" class="nav-link text-white" >Medical Records</a>
+
+                               <a asp-action="GetAllAppointmentsForThatPatient" asp-controller="Appointment" asp-route-Id="@User?.Claims?.FirstOrDefault(c => c.Type == "PatientId").Value" class="nav-link text-white">Appointments</a>
+                                <a asp-action="ViewPatientMedicalRecords" asp-controller="MedicalRecord" asp-route-Id="@User?.Claims?.FirstOrDefault(c => c.Type == "PatientId").Value" class="nav-link text-white" >Medical Records</a>
                                 
                             }
  
