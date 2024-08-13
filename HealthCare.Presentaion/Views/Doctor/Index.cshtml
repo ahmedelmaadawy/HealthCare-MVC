@@ -4,7 +4,7 @@
     ViewData["Title"] = "All Doctors";
 } 
 
-<h1>All Doctors</h1>
+<h1 class="mt-3 fw-bold">All Doctors</h1>
 
 <form asp-action="Index" method="get">
     <div class="form-group mb-5">
@@ -68,3 +68,89 @@
 }
     </tbody>
 </table>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f8fc;
+        color: #333;
+    }
+
+    h1 {
+        color: #3b73af;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .form-group input[type="text"] {
+        border: 2px solid #3b73af;
+        border-radius: 5px;
+    }
+
+    .btn-primary {
+        background-color: #3b73af;
+        border-color: #3b73af;
+        color: #fff;
+        border-radius: 5px;
+        padding: 8px 20px;
+    }
+
+        .btn-primary:hover {
+            background-color: #2f5f90;
+            border-color: #2f5f90;
+        }
+
+    .btn-warning {
+        background-color: #ffca28;
+        border-color: #ffb300;
+        color: #fff;
+        border-radius: 5px;
+        padding: 8px 20px;
+    }
+
+    .btn-danger {
+        background-color: #e53935;
+        border-color: #d32f2f;
+        color: #fff;
+        border-radius: 5px;
+        padding: 8px 20px;
+    }
+
+    .btn-success {
+        background-color: #43a047;
+        border-color: #388e3c;
+        color: #fff;
+        border-radius: 5px;
+        padding: 8px 20px;
+    }
+
+    table.table {
+        width: 100%;
+        background-color: #fff;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+        table.table th {
+            background-color: #3b73af;
+            color: white;
+            text-align: left;
+            padding: 15px;
+        }
+
+        table.table td {
+            border-bottom: 1px solid #ddd;
+            padding: 15px;
+        }
+
+        table.table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    a {
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
