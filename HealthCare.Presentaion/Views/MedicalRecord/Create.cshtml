@@ -1,4 +1,4 @@
-﻿@model AddingMedicalRecordVM
+﻿@* @model AddingMedicalRecordVM
 @{
     ViewData["Title"] = "AddMedicalRecord";
 }
@@ -32,4 +32,103 @@
         <span asp-validation-for="Prescription" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
-</form>
+</form> *@
+@model AddingMedicalRecordVM
+@{
+    ViewData["Title"] = "AddMedicalRecord";
+}
+
+
+        <form asp-action="Create" method="post">
+            <div class="form-group">
+                <label asp-for="PatientId"></label>
+                <input asp-for="PatientId" class="form-control" />
+                <span asp-validation-for="PatientId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DoctorId"></label>
+                <input asp-for="DoctorId" class="form-control" />
+                <span asp-validation-for="DoctorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppointmentDate"></label>
+                <input asp-for="AppointmentDate" class="form-control" />
+                <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prescription"></label>
+                <textarea asp-for="Prescription" class="form-control"></textarea>
+                <span asp-validation-for="Prescription" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+
+
+<style>
+
+
+    .container {      
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+    .text-danger {
+        color: #d9534f;
+        font-size: 14px;
+        display: block;
+        margin-top: 5px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 16px;
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+        background-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>

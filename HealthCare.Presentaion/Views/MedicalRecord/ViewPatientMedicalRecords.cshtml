@@ -5,7 +5,7 @@
 
 
 
-
+@* 
 <h2>Patient's Medical Records</h2>
 
 <table class="table">
@@ -34,4 +34,29 @@
             </tr>
         }
     </tbody>
-</table>
+</table> *@
+
+
+<link rel="stylesheet" type="text/css" href="~/css/site.css" />
+
+<h2 id="doch2">Doctor's Medical Records</h2>
+
+<div class="records-container">
+    @foreach (var record in Model)
+    {
+        <div class="record-card">
+            <h3>@record.DoctorName</h3>
+            <p><strong>Doctor:</strong> @record.DoctorName</p>
+            <p><strong>Date:</strong> @record.AppointmentDate.ToString("MMMM dd, yyyy")</p>
+            <p><strong>Description:</strong> @record.Description</p>
+            <p><strong>Prescription:</strong> @record.Prescription</p>
+            <a asp-action="Details" asp-route-id="@record.Id" class="details-button">View Details</a>
+        </div>
+    }
+</div>
+<style>
+    #doch2{
+        text-align:center;
+        margin:20px;
+    }
+</style>
