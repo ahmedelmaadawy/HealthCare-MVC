@@ -14,7 +14,7 @@ namespace HealthCare.Presentaion.Controllers
         {
             _service = service;
         }
-        [Authorize(Roles = "Doctor")]
+        [Authorize(Roles = "Doctor")]       
         [HttpGet]
         public IActionResult Create()
         {

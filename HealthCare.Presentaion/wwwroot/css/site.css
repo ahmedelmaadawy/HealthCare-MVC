@@ -19,4 +19,48 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color:#eee;
 }
+.records-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+.record-card {
+    background-color: #e0f7fa;
+    border: 1px solid #b2ebf2;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+}
+
+    .record-card h3 {
+        margin-top: 0;
+        color: #00796b;
+    }
+
+    .record-card p {
+        margin: 10px 0;
+        color: #00796b;
+        line-height: 1.6;
+        text-indent: -2em;
+        padding-left: 2em;
+    }
+
+.details-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #00796b;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+    .details-button:hover {
+        background-color: #004d40;
+    }
