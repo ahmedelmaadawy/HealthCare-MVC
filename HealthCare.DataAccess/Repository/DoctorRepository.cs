@@ -1,6 +1,7 @@
 ﻿using HealthCare.DataAccess.Context;
 using HealthCare.DataAccess.Interfaces;
 using HealthCare.DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare.DataAccess.Repository
 {
@@ -16,7 +17,7 @@ namespace HealthCare.DataAccess.Repository
 
         public List<Doctor> GetAll() => _context.Doctors.ToList();
 
-        public Doctor GetById(int id) => _context.Doctors.FirstOrDefault(d => d.Id == id);
+        public Doctor GetById(int id) => _context.Doctors.Include(d => d.AvailableTimeSlots).FirstOrDefault(d => d.Id == id);
 
         public void Update(Doctor doctor)
         {

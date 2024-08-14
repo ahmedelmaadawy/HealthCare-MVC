@@ -1,5 +1,5 @@
 ﻿using HealthCare.BusinessLogic.Interfaces;
-using HealthCare.BusinessLogic.ViewModels.TimeSlot;
+using HealthCare.BusinessLogic.ViewModels.TimeSlotVMs;
 using HealthCare.DataAccess.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -126,6 +126,20 @@ namespace HealthCare.Presentaion.Controllers
                 return RedirectToAction("Details", new { id = model.DoctorID });
             }
             return View("AddTimeSlot", model);
+        }
+        [HttpGet]
+        public IActionResult DisplayTimeSlots(int id, DateTime Date)
+        {
+            var doctor = _service.GetById(id);
+            var timeSlot = doctor.AvailableTimeSlots?.Where(t => t.IsAvailable == true && t.StartTime.Date >= Date.Date).ToList();
+            var tmVM = new TimeSlotwithDoctorVM()
+            {
+                DoctorName = doctor.FirstName + ' ' + doctor.LastName,
+                Address = doctor.OfficeAddress,
+                Contact = doctor.ContactNumber,
+                TimeSlots = timeSlot.ToList()
+            };
+            return View(tmVM);
         }
     }
 }

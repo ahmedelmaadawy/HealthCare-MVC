@@ -30,11 +30,22 @@ namespace HealthCare.BusinessLogic.Services
             _context.Compelete();
 
         }
-        public void BookAppointment(Appointment appointment)
+        public void BookAppointment(int timeslotId, int patientId)
         {
-            appointment.Status = AppointmentStatus.Scheduled;
-            _context.Appointments.Create(appointment);
-            _context.Compelete();
+            var timeslot = _context.TimeSlots.GetById(timeslotId);
+            if (timeslot != null)
+            {
+                timeslot.IsAvailable = false;
+                var appointment = new Appointment()
+                {
+                    PatientId = patientId,
+                    DoctorId = timeslot.DoctorID,
+                    DateTime = timeslot.StartTime,
+                    Status = AppointmentStatus.Scheduled
+                };
+                _context.Appointments.Create(appointment);
+                _context.Compelete();
+            }
         }
         public void Update(Appointment appointment)
         {

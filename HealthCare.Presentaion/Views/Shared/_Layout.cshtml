@@ -43,7 +43,7 @@
                             }
                             else if (User.IsInRole("Patient"))
                             {
-                               <a asp-action="GetAllAppointmentsForThatPatient" asp-controller="Appointment" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="nav-link text-white">Appointments</a>
+                                <a asp-action="PatientAppointments" asp-controller="Appointment" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="nav-link text-white">Appointments</a>
                                 <a asp-action="ViewPatientMedicalRecords" asp-controller="MedicalRecord" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="nav-link text-white" >Medical Records</a>
                                 
                             }
@@ -75,11 +75,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - HealthCare.Presentaion - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

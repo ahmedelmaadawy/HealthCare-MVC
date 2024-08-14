@@ -1,43 +1,9 @@
-﻿@* @model AddingMedicalRecordVM
+﻿@model AddingMedicalRecordVM
 @{
     ViewData["Title"] = "AddMedicalRecord";
 }
 
-<h1>AddMedicalRecord</h1>
-
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="PatientId"></label>
-        <input asp-for="PatientId" class="form-control" />
-        <span asp-validation-for="PatientId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="DoctorId"></label>
-        <input asp-for="DoctorId" class="form-control" />
-        <span asp-validation-for="DoctorId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="AppointmentDate"></label>
-        <input asp-for="AppointmentDate" class="form-control" />
-        <span asp-validation-for="AppointmentDate" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-     <div class="form-group">
-        <label asp-for="Prescription"></label>
-        <textarea asp-for="Prescription" class="form-control"></textarea>
-        <span asp-validation-for="Prescription" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-</form> *@
-@model AddingMedicalRecordVM
-@{
-    ViewData["Title"] = "AddMedicalRecord";
-}
-
+<h3 class="text-center">Medical Record For Your Patient</h3>
 
         <form asp-action="Create" method="post">
             <div class="form-group">
@@ -52,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="AppointmentDate"></label>
-                <input asp-for="AppointmentDate" class="form-control" />
+                <input asp-for="AppointmentDate" value="@DateTime.Now" type="datetime-local" class="form-control" />
                 <span asp-validation-for="AppointmentDate" class="text-danger"></span>
             </div>
             <div class="form-group">

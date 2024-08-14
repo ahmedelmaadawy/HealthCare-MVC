@@ -21,20 +21,20 @@
 {
     <tr>
             <td>@appointment.DateTime</td>
-                <td>@appointment.Status</td>
-                <td>@appointment.Patient.FirstName @appointment.Patient.LastName</td>
-                    <td>@appointment.Patient.DateOfBirth</td>
-                        <td>@appointment.Patient.ContactNumber</td>
-                            <td>@appointment.Patient.Gender</td>
-                            <td>
-                @if (appointment.Status == AppointmentStatus.Scheduled)
-                              {
-                                  <button class="btn btn-primary">
-                                                            <a  class="text-white" style="text-decoration:none" href="/Appointment/CompletedAppointment/@appointment.Id">copmlete</a>
-                                </button>
-                              }
+            <td>@appointment.Status</td>
+            <td>@appointment.Patient.FirstName @appointment.Patient.LastName</td>
+            <td>@appointment.Patient.DateOfBirth</td>
+            <td>@appointment.Patient.ContactNumber</td>
+            <td>@appointment.Patient.Gender</td>
+            <td>
+                 @if (appointment.Status == AppointmentStatus.Scheduled)
+                    {
+                    <button class="btn btn-primary">
+                     <a  class="text-white" style="text-decoration:none" href="/Appointment/CompletedAppointment/@appointment.Id">copmlete</a>
+                     </button>
+                  }
                 
-                            </td>
+            </td>
     </tr>
 }
 </table>

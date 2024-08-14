@@ -21,5 +21,9 @@ namespace HealthCare.DataAccess.Repository
         {
             _context.TimeSlots.Remove(timeSlot);
         }
+        public TimeSlot GetById(int id)
+        {
+            return _context.TimeSlots.FirstOrDefault(t => t.Id == id);
+        }
     }
 }

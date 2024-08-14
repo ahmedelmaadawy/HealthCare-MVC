@@ -1,0 +1,43 @@
+﻿@model TimeSlotwithDoctorVM
+
+<div class="container my-5">
+    <div class="card bg-light text-dark shadow-lg">
+        <div class="card-body text-center">
+            <h1 class="card-title">@Model.DoctorName</h1>
+            <p class="card-text"><strong>Address:</strong> @Model.Address</p>
+            <p class="card-text"><strong>Contact:</strong> @Model.Contact</p>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        @foreach (var item in Model.TimeSlots)
+        {
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Appointment</h5>
+                    <p class="card-text"><strong>Date:</strong> @item.StartTime.ToShortDateString()</p>
+                    <p class="card-text"><strong>Time:</strong> @item.StartTime.ToString("hh\\:mm tt")</p>
+                    <a class="btn btn-primary" asp-action="BookNewAppointment" asp-controller="Appointment" asp-route-patientId="@User.Claims.FirstOrDefault(c=>c.Type =="PatientId")?.Value" asp-route-timeslotId="@item.Id">Book Appointment</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa; /* Light background color */
+    }
+
+    .card-title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }

@@ -6,5 +6,6 @@ namespace HealthCare.DataAccess.Interfaces
     {
         void Add(TimeSlot timeSlot);
         void Delete(TimeSlot timeSlot);
+        public TimeSlot GetById(int id);
     }
 }

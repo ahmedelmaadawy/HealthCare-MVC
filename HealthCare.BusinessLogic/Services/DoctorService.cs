@@ -3,8 +3,6 @@ using HealthCare.BusinessLogic.Interfaces;
 using HealthCare.BusinessLogic.ViewModels.Doctor;
 using HealthCare.DataAccess.Interfaces;
 using HealthCare.DataAccess.Models;
-using HealthCare.DataAccess.Repository;
-using System.Runtime.CompilerServices;
 
 namespace HealthCare.BusinessLogic.Services
 {
@@ -30,7 +28,7 @@ namespace HealthCare.BusinessLogic.Services
             var doctorsVM = _mapper.Map<List<DoctorToDisplayVM>>(doctors);
             return doctorsVM;
         }
-        
+
         public Doctor GetById(int id)
         {
             return _context.Doctors.GetById(id);
@@ -38,7 +36,7 @@ namespace HealthCare.BusinessLogic.Services
 
         public void Update(int Id, Doctor doctor)
         {
-            var doc = _context.Doctors.GetAll().Where(d=>d.Id==Id).FirstOrDefault();
+            var doc = _context.Doctors.GetAll().Where(d => d.Id == Id).FirstOrDefault();
             if (doc != null)
             {
                 doc.FirstName = doctor.FirstName;
@@ -60,6 +58,7 @@ namespace HealthCare.BusinessLogic.Services
             _context.TimeSlots.Add(timeSlot);
             _context.Compelete();
         }
+
 
     }
 }

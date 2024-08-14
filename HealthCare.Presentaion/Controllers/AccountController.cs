@@ -40,8 +40,10 @@ namespace HealthCare.Presentaion.Controllers
 
                     if (res.Succeeded)
                     {
+                        await _signInManager.SignInAsync(user, false);
 
                         if (userVm.Role == "Doctor")
+
                         {
                             return RedirectToAction("Create", "Doctor");
                         }
@@ -49,19 +51,21 @@ namespace HealthCare.Presentaion.Controllers
                         {
                             return RedirectToAction("Create", "Patient");
                         }
-                        else
-                        {
-                            throw new Exception("erron in role");
-                        }
-                    }
 
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("Identity", error.Description);
+
                     }
-                    return View(userVm);
+                    else
+                    {
+                        throw new Exception("erron in role");
+
+                    }
 
                 }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("Identity", error.Description);
+                }
+                return View(userVm);
             }
             return View(userVm);
 
@@ -120,7 +124,7 @@ namespace HealthCare.Presentaion.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Register");
+            return RedirectToAction("Login");
         }
 
 
