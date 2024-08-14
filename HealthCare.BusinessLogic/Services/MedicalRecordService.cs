@@ -1,13 +1,8 @@
-﻿using HealthCare.BusinessLogic.Interfaces;
-using HealthCare.DataAccess.Models;
-using HealthCare.DataAccess.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
+using HealthCare.BusinessLogic.Interfaces;
 using HealthCare.BusinessLogic.ViewModels.MedicalRecord;
+using HealthCare.DataAccess.Interfaces;
+using HealthCare.DataAccess.Models;
 
 namespace HealthCare.BusinessLogic.Services
 {
@@ -21,68 +16,41 @@ namespace HealthCare.BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public void CreateMedicalRecord(AddingMedicalRecordVM model)
+        public async Task CreateMedicalRecord(AddingMedicalRecordVM model)
         {
-            var record = new MedicalRecord
-            {
-                DoctorID = model.DoctorId,
-                PatientID = model.PatientId,
-                Date = model.AppointmentDate,
-                Description = model.Description,
-                Prescription=model.Prescription
-                
-            };
-             _context.MedicalRecords.AddMedicalRecord(record);
-            _context.Compelete();
+
+            var record = _mapper.Map<MedicalRecord>(model);
+            await _context.MedicalRecords.AddMedicalRecord(record);
+            await _context.Compelete();
         }
 
-     
 
-        public MedicalRecordViewModel GetMedicalRecordById(int id)
-        {
-            var record = _context.MedicalRecords.GetMedicalRecordById(id);
-            return new MedicalRecordViewModel
-            {
-                Id = record.Id,
-                DoctorId = record.DoctorID,
-                PatientId = record.PatientID,
-                AppointmentDate = record.Date,
-                Description = record.Description,
-                Prescription=record.Prescription,
-                DoctorName = record.Doctor.FirstName,
-                PatientName = record.Patient.FirstName
-            };
-        }
-       
 
-        public List<MedicalRecordViewModel> GetMedicalRecordsByDoctor(int doctorId)
+        public async Task<MedicalRecordViewModel> GetMedicalRecordById(int id)
         {
-            return _context.MedicalRecords.GetMedicalRecordsByDoctor(doctorId)
-                .Select(r => new MedicalRecordViewModel
-                {
-                    Id = r.Id,
-                    PatientName = r.Patient.FirstName,
-                    AppointmentDate = r.Date,
-                    Description = r.Description,
-                    Prescription=r.Prescription
-                }).ToList();
+            var record = await _context.MedicalRecords.GetMedicalRecordById(id);
+            var result = _mapper.Map<MedicalRecordViewModel>(record);
+            return result;
         }
 
-        public List<MedicalRecordViewModel> GetMedicalRecordsByPatient(int patientId)
+
+        public async Task<List<MedicalRecordViewModel>> GetMedicalRecordsByDoctor(int doctorId)
         {
-            return _context.MedicalRecords.GetMedicalRecordsByPatient(patientId)
-                .Select(r => new MedicalRecordViewModel
-                {
-                    Id = r.Id,
-                    DoctorName = r.Doctor.FirstName,
-                    AppointmentDate = r.Date,
-                    Description = r.Description,
-                    Prescription=r.Prescription
-                }).ToList();
+            var records = await _context.MedicalRecords.GetMedicalRecordsByDoctor(doctorId);
+            var result = _mapper.Map<List<MedicalRecordViewModel>>(records);
+            return result;
         }
 
-      
+        public async Task<List<MedicalRecordViewModel>> GetMedicalRecordsByPatient(int patientId)
+        {
+            var records = await _context.MedicalRecords.GetMedicalRecordsByPatient(patientId);
+            var result = _mapper.Map<List<MedicalRecordViewModel>>(records);
 
-     
+            return result;
+        }
+
+
+
+
     }
 }

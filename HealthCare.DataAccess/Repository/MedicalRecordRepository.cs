@@ -2,11 +2,6 @@
 using HealthCare.DataAccess.Interfaces;
 using HealthCare.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthCare.DataAccess.Repository
 {
@@ -19,37 +14,37 @@ namespace HealthCare.DataAccess.Repository
         {
             _context = context;
         }
-        
-        public void AddMedicalRecord(MedicalRecord record)
+
+        public async Task AddMedicalRecord(MedicalRecord record)
         {
-            _context.MedicalRecords.Add(record);
-            
+            await _context.MedicalRecords.AddAsync(record);
+
         }
 
-        public List<MedicalRecord> GetAllMedicalRecords()
+        public async Task<List<MedicalRecord>> GetAllMedicalRecords()
         {
-            return _context.MedicalRecords.ToList();
+            return await _context.MedicalRecords.ToListAsync();
         }
 
-        public MedicalRecord GetMedicalRecordById(int id)
+        public async Task<MedicalRecord> GetMedicalRecordById(int id)
         {
-            return _context.MedicalRecords.Include(r => r.Doctor).Include(r => r.Patient).FirstOrDefault(r=>r.Id==id);
+            return await _context.MedicalRecords.Include(r => r.Doctor).Include(r => r.Patient).FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public List<MedicalRecord> GetMedicalRecordsByDoctor(int doctorId)
+        public async Task<List<MedicalRecord>> GetMedicalRecordsByDoctor(int doctorId)
         {
-            return _context.MedicalRecords.Include(r=>r.Patient)
+            return await _context.MedicalRecords.Include(r => r.Patient)
                 .Where(r => r.DoctorID == doctorId)
-                .ToList();
+                .ToListAsync();
         }
 
-        public List<MedicalRecord> GetMedicalRecordsByPatient(int patientId)
+        public async Task<List<MedicalRecord>> GetMedicalRecordsByPatient(int patientId)
         {
-            return _context.MedicalRecords.Include(r=>r.Doctor)
+            return await _context.MedicalRecords.Include(r => r.Doctor)
                 .Where(r => r.PatientID == patientId)
-                .ToList();
+                .ToListAsync();
         }
-        
-      
+
+
     }
 }

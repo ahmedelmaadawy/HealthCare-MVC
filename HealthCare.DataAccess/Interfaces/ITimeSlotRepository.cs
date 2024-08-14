@@ -4,9 +4,9 @@ namespace HealthCare.DataAccess.Interfaces
 {
     public interface ITimeSlotRepository
     {
-        void Add(TimeSlot timeSlot);
+        Task Add(TimeSlot timeSlot);
         void Delete(TimeSlot timeSlot);
-        public TimeSlot GetById(int id);
+        public Task<TimeSlot> GetById(int id);
         public void Update(TimeSlot timeSlot);
 
     }

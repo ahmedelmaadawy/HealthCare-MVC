@@ -16,10 +16,10 @@ namespace HealthCare.Presentaion.Controllers
             _service = service;
         }
         [AllowAnonymous]
-        public IActionResult Index(string searchString)
+        public async Task<IActionResult> Index(string searchString)
         {
 
-            var doctors = _service.GetAll();
+            var doctors = await _service.GetAll();
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -38,13 +38,13 @@ namespace HealthCare.Presentaion.Controllers
         }
         [Authorize(Roles = "Doctor")]
         [HttpPost]
-        public IActionResult Create(Doctor doctor)
+        public async Task<IActionResult> Create(Doctor doctor)
         {
             doctor.UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
             if (ModelState.IsValid)
             {
-                _service.Add(doctor);
+                await _service.Add(doctor);
                 return RedirectToAction("Logout", "Account");
             }
             else
@@ -52,40 +52,38 @@ namespace HealthCare.Presentaion.Controllers
                 return View("Create", doctor);
             }
         }
-        //----------------------------------------------------------------
-        [Authorize(Roles = "Doctor")]
 
+        [Authorize(Roles = "Doctor")]
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var doctor = _service.GetById(id);
+            var doctor = await _service.GetById(id);
             return View(doctor);
         }
-        [Authorize(Roles = "Doctor")]
 
         [Authorize(Roles = "Doctor")]
         [HttpPost]
-        public IActionResult Edit(Doctor doctor)
+        public async Task<IActionResult> Edit(Doctor doctor)
         {
             if (ModelState.IsValid)
             {
 
-                _service.Update(doctor.Id, doctor);
+                await _service.Update(doctor.Id, doctor);
                 return RedirectToAction("Index");
             }
             return View("Edit", doctor);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _service.Delete(id);
+            await _service.Delete(id);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var doctor = _service.GetById(id);
+            var doctor = await _service.GetById(id);
             if (doctor == null)
             {
                 return NotFound();
@@ -94,10 +92,10 @@ namespace HealthCare.Presentaion.Controllers
         }
         [Authorize(Roles = "Doctor")]
         [HttpGet]
-        public IActionResult AddTimeSlot(int doctorId)
+        public async Task<IActionResult> AddTimeSlot(int doctorId)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
-            var doctor = _service.GetById(doctorId);
+            var doctor = await _service.GetById(doctorId);
             if (userId == doctor.UserId)
             {
                 var model = new TimeSlotViewModel
@@ -110,7 +108,7 @@ namespace HealthCare.Presentaion.Controllers
             return Unauthorized();
         }
         [HttpPost]
-        public IActionResult AddTimeSlot(TimeSlotViewModel model)
+        public async Task<IActionResult> AddTimeSlot(TimeSlotViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -121,16 +119,16 @@ namespace HealthCare.Presentaion.Controllers
                     IsAvailable = true,
                 };
 
-                _service.AddTimeSlot(timeSlot);
+                await _service.AddTimeSlot(timeSlot);
 
                 return RedirectToAction("DisplayTimeSlots", new { id = model.DoctorID, Date = DateTime.Now });
             }
             return View("AddTimeSlot", model);
         }
         [HttpGet]
-        public IActionResult DisplayTimeSlots(int id, DateTime Date)
+        public async Task<IActionResult> DisplayTimeSlots(int id, DateTime Date)
         {
-            var doctor = _service.GetById(id);
+            var doctor = await _service.GetById(id);
             var timeSlot = doctor.AvailableTimeSlots?.Where(t => t.IsAvailable == true && t.StartTime.Date >= Date.Date).ToList();
             var tmVM = new TimeSlotwithDoctorVM()
             {

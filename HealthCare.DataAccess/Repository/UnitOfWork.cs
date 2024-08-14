@@ -24,9 +24,9 @@ namespace HealthCare.DataAccess.Repository
             Appointments = appointments;
             Patients = patients;
         }
-        public int Compelete()
+        public async Task<int> Compelete()
         {
-            return _context.SaveChanges();
+            return await _context.SaveChangesAsync();
         }
 
         public void Dispose()

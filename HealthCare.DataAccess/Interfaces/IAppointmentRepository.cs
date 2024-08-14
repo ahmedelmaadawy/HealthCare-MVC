@@ -4,11 +4,11 @@ namespace HealthCare.DataAccess.Interfaces
 {
     public interface IAppointmentRepository
     {
-        public List<Appointment> GetByDoctorId(int doctorId);
-        public List<Appointment> GetByPatientId(int patientId);
-        public void Create(Appointment appointment);
+        public Task<List<Appointment>> GetByDoctorId(int doctorId);
+        public Task<List<Appointment>> GetByPatientId(int patientId);
+        public Task Create(Appointment appointment);
         public void Update(Appointment appointment);
-        public Appointment GetById(int id);
+        public Task<Appointment> GetById(int id);
 
     }
 }

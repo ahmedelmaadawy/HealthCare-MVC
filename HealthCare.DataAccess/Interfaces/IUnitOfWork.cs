@@ -8,7 +8,7 @@
         IPatientRepository Patients { get; }
 
         IMedicalRecordRepositery MedicalRecords { get; }
-        int Compelete();
+        Task<int> Compelete();
 
     }
 }

@@ -36,8 +36,6 @@ namespace HealthCare.Presentaion.Controllers
                 if (result.Succeeded)
                 {
                     var res = await _userManager.AddToRoleAsync(user, userVm.Role);
-                    //  await _signInManager.SignInAsync(user, false);
-
                     if (res.Succeeded)
                     {
                         await _signInManager.SignInAsync(user, false);
@@ -51,15 +49,11 @@ namespace HealthCare.Presentaion.Controllers
                         {
                             return RedirectToAction("Create", "Patient");
                         }
-
-
                     }
                     else
                     {
                         throw new Exception("erron in role");
-
                     }
-
                 }
                 foreach (var error in result.Errors)
                 {
@@ -87,8 +81,10 @@ namespace HealthCare.Presentaion.Controllers
                     if (result)
                     {
                         await _signInManager.SignInAsync(user, false);
-                        var doctor = _context.Doctors.GetAll().FirstOrDefault(d => d.UserId == user.Id);
-                        var patient = _context.Patients.GetAll().FirstOrDefault(d => d.UserId == user.Id);
+                        var doctors = await _context.Doctors.GetAll();
+                        var doctor = doctors.FirstOrDefault(d => d.UserId == user.Id);
+                        var patients = await _context.Patients.GetAll();
+                        var patient = patients.FirstOrDefault(d => d.UserId == user.Id);
                         if (doctor == null && User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value == "Doctor")
                         {
                             return RedirectToAction("Create", "Doctor");

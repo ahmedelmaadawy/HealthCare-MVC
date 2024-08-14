@@ -5,10 +5,10 @@ namespace HealthCare.BusinessLogic.Interfaces
 {
     public interface IPatientService
     {
-        List<PatientToDisplayVM> GetAll();
-        Patient GetPatientById(int id);
-        void Add(Patient patient);
-        void Update(Patient patient);
-        void Delete(int id);
+        Task<List<PatientToDisplayVM>> GetAll();
+        Task<Patient> GetPatientById(int id);
+        Task Add(Patient patient);
+        Task Update(Patient patient);
+        Task Delete(int id);
     }
 }

@@ -17,9 +17,9 @@ namespace HealthCare.Presentaion.Controllers
         }
         [Authorize(Roles = "Doctor")]
         [HttpGet]
-        public IActionResult Create(int id)
+        public async Task<IActionResult> Create(int id)
         {
-            var appointment = _appointmentsService.GetById(id);
+            var appointment = await _appointmentsService.GetById(id);
             var medicalVm = new MedicalRecordViewModel()
             {
                 DoctorId = appointment.DoctorId,
@@ -32,11 +32,11 @@ namespace HealthCare.Presentaion.Controllers
         }
         [Authorize(Roles = "Doctor")]
         [HttpPost]
-        public IActionResult Create(AddingMedicalRecordVM model)
+        public async Task<IActionResult> Create(AddingMedicalRecordVM model)
         {
             if (ModelState.IsValid)
             {
-                _service.CreateMedicalRecord(model);
+                await _service.CreateMedicalRecord(model);
                 return RedirectToAction("Index", "Doctor");
             }
             return View(model);
@@ -44,25 +44,25 @@ namespace HealthCare.Presentaion.Controllers
 
 
         [HttpGet]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var record = _service.GetMedicalRecordById(id);
+            var record = await _service.GetMedicalRecordById(id);
             return View(record);
         }
 
         [Authorize(Roles = "Doctor")]
         [HttpGet]
-        public IActionResult ViewDoctorMedicalRecords(int id)
+        public async Task<IActionResult> ViewDoctorMedicalRecords(int id)
         {
-            var records = _service.GetMedicalRecordsByDoctor(id);
+            var records = await _service.GetMedicalRecordsByDoctor(id);
             return View(records);
         }
 
         [HttpGet]
         [Authorize(Roles = "Patient")]
-        public IActionResult ViewPatientMedicalRecords(int id)
+        public async Task<IActionResult> ViewPatientMedicalRecords(int id)
         {
-            var records = _service.GetMedicalRecordsByPatient(id);
+            var records = await _service.GetMedicalRecordsByPatient(id);
             return View(records);
         }
     }

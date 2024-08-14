@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HealthCare.BusinessLogic.ViewModels.Doctor;
 using HealthCare.BusinessLogic.ViewModels.Identity;
+using HealthCare.BusinessLogic.ViewModels.MedicalRecord;
 using HealthCare.BusinessLogic.ViewModels.Patient;
 using HealthCare.DataAccess.Models;
 
@@ -16,6 +17,10 @@ namespace HealthCare.Presentaion.Mapper
             CreateMap<PatientToCreateVM, Patient>();
             CreateMap<PatientToEditVM, Patient>();
             CreateMap<Patient, PatientToEditVM>();
+            CreateMap<AddingMedicalRecordVM, MedicalRecord>().ForMember(m => m.Date, opt => opt.MapFrom(x => x.AppointmentDate));
+            CreateMap<MedicalRecord, MedicalRecordViewModel>().ForMember(m => m.AppointmentDate, opt => opt.MapFrom(x => x.Date))
+                .ForMember(vm => vm.DoctorName, opt => opt.MapFrom(x => string.Join(' ', x.Doctor.FirstName, x.Doctor.FirstName)))
+                .ForMember(vm => vm.PatientName, opt => opt.MapFrom(x => string.Join(' ', x.Patient.FirstName, x.Patient.FirstName)));
 
         }
 

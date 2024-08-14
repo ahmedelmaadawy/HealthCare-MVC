@@ -20,15 +20,14 @@ namespace HealthCare.Presentaion.Controllers
             _mapper = mapper;
         }
         [Authorize(Roles = "Admin")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var patients = _service.GetAll();
+            var patients = await _service.GetAll();
             return View(patients);
         }
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var patient = _service.GetPatientById(id);
-
+            var patient = await _service.GetPatientById(id);
             return View(_mapper.Map<PatientToDisplayVM>(patient));
         }
 
@@ -41,26 +40,26 @@ namespace HealthCare.Presentaion.Controllers
 
         [Authorize(Roles = "Patient")]
         [HttpPost]
-        public IActionResult Create(PatientToCreateVM patientVm)
+        public async Task<IActionResult> Create(PatientToCreateVM patientVm)
         {
             if (ModelState.IsValid)
             {
                 var patient = _mapper.Map<Patient>(patientVm);
                 patient.UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
-                _service.Add(patient);
+                await _service.Add(patient);
                 return RedirectToAction("Logout", "Account");
             }
             return View(patientVm);
         }
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var patient = _service.GetPatientById(id);
+            var patient = await _service.GetPatientById(id);
             if (patient == null)
             {
                 return NotFound();
             }
-            var userid = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            var userid = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (userid == patient.UserId)
             {
                 var patientModel = _mapper.Map<PatientToEditVM>(patient);
@@ -74,14 +73,14 @@ namespace HealthCare.Presentaion.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(PatientToEditVM patientVM)
+        public async Task<IActionResult> Edit(PatientToEditVM patientVM)
         {
             if (ModelState.IsValid)
             {
                 var patient = _mapper.Map<Patient>(patientVM);
                 try
                 {
-                    _service.Update(patient);
+                    await _service.Update(patient);
                     return RedirectToAction("Details", new { id = patient.Id });
                 }
                 catch (ArgumentException)
@@ -91,14 +90,14 @@ namespace HealthCare.Presentaion.Controllers
             }
             return View("Edit", patientVM);
         }
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var patient = _service.GetPatientById(id);
+            var patient = await _service.GetPatientById(id);
             if (patient == null)
             {
                 return NotFound();
             }
-            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
             if (userId == patient.UserId)
                 return View(patient);
@@ -106,12 +105,13 @@ namespace HealthCare.Presentaion.Controllers
                 return Unauthorized();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             try
             {
-                _service.Delete(id);
+                await _service.Delete(id);
                 return RedirectToAction("Index");
             }
             catch (ArgumentException)

@@ -12,12 +12,12 @@ namespace HealthCare.DataAccess.Repository
         {
             _context = context;
         }
-        public void Add(Doctor doctor) => _context.Doctors.Add(doctor);
+        public async Task Add(Doctor doctor) => await _context.Doctors.AddAsync(doctor);
 
 
-        public List<Doctor> GetAll() => _context.Doctors.ToList();
+        public async Task<List<Doctor>> GetAll() => await _context.Doctors.ToListAsync();
 
-        public Doctor GetById(int id) => _context.Doctors.Include(d => d.AvailableTimeSlots).FirstOrDefault(d => d.Id == id);
+        public async Task<Doctor> GetById(int id) => await _context.Doctors.Include(d => d.AvailableTimeSlots).FirstOrDefaultAsync(d => d.Id == id);
 
         public void Update(Doctor doctor)
         {

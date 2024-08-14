@@ -15,28 +15,29 @@ namespace HealthCare.BusinessLogic.Services
             _context = context;
             _mapper = mapper;
         }
-        public void Add(Doctor doctor)
+        public async Task Add(Doctor doctor)
         {
-            _context.Doctors.Add(doctor);
-            _context.Compelete();
+            await _context.Doctors.Add(doctor);
+            await _context.Compelete();
         }
 
-        public List<DoctorToDisplayVM> GetAll()
+        public async Task<List<DoctorToDisplayVM>> GetAll()
         {
-            var doctors = _context.Doctors.GetAll();
+            var doctors = await _context.Doctors.GetAll();
 
             var doctorsVM = _mapper.Map<List<DoctorToDisplayVM>>(doctors);
             return doctorsVM;
         }
 
-        public Doctor GetById(int id)
+        public async Task<Doctor> GetById(int id)
         {
-            return _context.Doctors.GetById(id);
+            return await _context.Doctors.GetById(id);
         }
 
-        public void Update(int Id, Doctor doctor)
+        public async Task Update(int Id, Doctor doctor)
         {
-            var doc = _context.Doctors.GetAll().Where(d => d.Id == Id).FirstOrDefault();
+            var res = await _context.Doctors.GetAll();
+            var doc = res.Where(d => d.Id == Id).FirstOrDefault();
             if (doc != null)
             {
                 doc.FirstName = doctor.FirstName;
@@ -45,18 +46,18 @@ namespace HealthCare.BusinessLogic.Services
                 doc.OfficeAddress = doctor.OfficeAddress;
                 doc.ContactNumber = doctor.ContactNumber;
                 _context.Doctors.Update(doctor);
-                _context.Compelete();
+                await _context.Compelete();
             }
         }
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             _context.Doctors.Delete(id);
-            _context.Compelete();
+            await _context.Compelete();
         }
-        public void AddTimeSlot(TimeSlot timeSlot)
+        public async Task AddTimeSlot(TimeSlot timeSlot)
         {
-            _context.TimeSlots.Add(timeSlot);
-            _context.Compelete();
+            await _context.TimeSlots.Add(timeSlot);
+            await _context.Compelete();
         }
 
 

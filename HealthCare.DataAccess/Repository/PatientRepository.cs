@@ -1,6 +1,7 @@
 ﻿using HealthCare.DataAccess.Context;
 using HealthCare.DataAccess.Interfaces;
 using HealthCare.DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare.DataAccess.Repository
 {
@@ -12,14 +13,14 @@ namespace HealthCare.DataAccess.Repository
             _context = context;
         }
 
-        public void Add(Patient patient)
+        public async Task Add(Patient patient)
         {
-            _context.Patients.Add(patient);
+            await _context.Patients.AddAsync(patient);
         }
 
-        public List<Patient> GetAll()
+        public async Task<List<Patient>> GetAll()
         {
-            return _context.Patients.ToList();
+            return await _context.Patients.ToListAsync();
         }
 
         public void Update(Patient patient)

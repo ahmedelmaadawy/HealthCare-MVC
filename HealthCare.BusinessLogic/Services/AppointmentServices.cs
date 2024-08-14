@@ -17,22 +17,23 @@ namespace HealthCare.BusinessLogic.Services
             _mapper = mapper;
         }
 
-        public List<Appointment> GetAllByDay(int doctorId, DateTime day)
+        public async Task<List<Appointment>> GetAllByDay(int doctorId, DateTime day)
         {
-            var Appointments = _context.Appointments.GetByDoctorId(doctorId).Where(x => x.DateTime.Date == day.Date).ToList();
-            return Appointments;
+            var Appointments = await _context.Appointments.GetByDoctorId(doctorId);
+            var result = Appointments.Where(x => x.DateTime.Date == day.Date).ToList();
+            return result;
         }
-        public void CompletedAppointment(int Id)
+        public async Task CompletedAppointment(int Id)
         {
-            var appointment = _context.Appointments.GetById(Id);
+            var appointment = await _context.Appointments.GetById(Id);
             appointment.Status = AppointmentStatus.Completed;
             _context.Appointments.Update(appointment);
-            _context.Compelete();
+            await _context.Compelete();
 
         }
-        public void BookAppointment(int timeslotId, int patientId)
+        public async Task BookAppointment(int timeslotId, int patientId)
         {
-            var timeslot = _context.TimeSlots.GetById(timeslotId);
+            var timeslot = await _context.TimeSlots.GetById(timeslotId);
             if (timeslot != null)
             {
                 timeslot.IsAvailable = false;
@@ -44,29 +45,29 @@ namespace HealthCare.BusinessLogic.Services
                     DateTime = timeslot.StartTime,
                     Status = AppointmentStatus.Scheduled
                 };
-                _context.Appointments.Create(appointment);
-                _context.Compelete();
+                await _context.Appointments.Create(appointment);
+                await _context.Compelete();
             }
         }
-        public void Update(Appointment appointment)
+        public async Task Update(Appointment appointment)
         {
             _context.Appointments.Update(appointment);
-            _context.Compelete();
+            await _context.Compelete();
         }
-        public void CancleAppointment(int ID)
+        public async Task CancleAppointment(int ID)
         {
-            var appointment = _context.Appointments.GetById(ID);
+            var appointment = await _context.Appointments.GetById(ID);
             appointment.Status = AppointmentStatus.Canceled;
             _context.Appointments.Update(appointment);
-            _context.Compelete();
+            await _context.Compelete();
         }
-        public List<Appointment> GetByPatientId(int patientId)
+        public async Task<List<Appointment>> GetByPatientId(int patientId)
         {
-            return _context.Appointments.GetByPatientId(patientId);
+            return await _context.Appointments.GetByPatientId(patientId);
         }
-        public Appointment GetById(int Id)
+        public async Task<Appointment> GetById(int Id)
         {
-            return _context.Appointments.GetById(Id);
+            return await _context.Appointments.GetById(Id);
         }
 
     }

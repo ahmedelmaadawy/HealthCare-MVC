@@ -15,28 +15,30 @@ namespace HealthCare.BusinessLogic.Services
             _context = context;
             _mapper = mapper;
         }
-        public void Add(Patient patient)
+        public async Task Add(Patient patient)
         {
-            _context.Patients.Add(patient);
-            _context.Compelete();
+            await _context.Patients.Add(patient);
+            await _context.Compelete();
         }
 
-        public List<PatientToDisplayVM> GetAll()
+        public async Task<List<PatientToDisplayVM>> GetAll()
         {
-            var patients = _context.Patients.GetAll();
+            var patients = await _context.Patients.GetAll();
             var patientsVM = _mapper.Map<List<PatientToDisplayVM>>(patients);
             return patientsVM;
         }
 
-        public Patient GetPatientById(int id)
+        public async Task<Patient> GetPatientById(int id)
         {
-            return _context.Patients.GetAll().FirstOrDefault(e => e.Id == id);
+            var record = await _context.Patients.GetAll();
+            return record.FirstOrDefault(e => e.Id == id);
 
         }
 
-        public void Update(Patient patient)
+        public async Task Update(Patient patient)
         {
-            var existingPatient = _context.Patients.GetAll().FirstOrDefault(e => e.Id == patient.Id);
+            var record = await _context.Patients.GetAll();
+            var existingPatient = record.FirstOrDefault(e => e.Id == patient.Id);
             if (existingPatient != null)
             {
                 existingPatient.FirstName = patient.FirstName;
@@ -48,22 +50,20 @@ namespace HealthCare.BusinessLogic.Services
 
 
                 _context.Patients.Update(existingPatient);
-                _context.Compelete();
+                await _context.Compelete();
             }
-            else
-            {
-                throw new ArgumentException($"Patient with ID {patient.Id} does not exist.");
-            }
+
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var patient = _context.Patients.GetAll().FirstOrDefault(e => e.Id == id);
+            var record = await _context.Patients.GetAll();
+            var patient = record.FirstOrDefault(e => e.Id == id);
             if (patient != null)
             {
 
                 _context.Patients.Delete(patient);
-                _context.Compelete();
+                await _context.Compelete();
             }
             else
             {

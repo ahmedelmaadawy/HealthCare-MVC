@@ -1,6 +1,7 @@
 ﻿using HealthCare.DataAccess.Context;
 using HealthCare.DataAccess.Interfaces;
 using HealthCare.DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare.DataAccess.Repository
 {
@@ -13,17 +14,17 @@ namespace HealthCare.DataAccess.Repository
             _context = context;
         }
 
-        public void Add(TimeSlot timeSlot)
+        public async Task Add(TimeSlot timeSlot)
         {
-            _context.TimeSlots.Add(timeSlot);
+            await _context.TimeSlots.AddAsync(timeSlot);
         }
         public void Delete(TimeSlot timeSlot)
         {
             _context.TimeSlots.Remove(timeSlot);
         }
-        public TimeSlot GetById(int id)
+        public async Task<TimeSlot> GetById(int id)
         {
-            return _context.TimeSlots.FirstOrDefault(t => t.Id == id);
+            return await _context.TimeSlots.FirstOrDefaultAsync(t => t.Id == id);
         }
         public void Update(TimeSlot timeSlot)
         {
