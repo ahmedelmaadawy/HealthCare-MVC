@@ -25,5 +25,10 @@ namespace HealthCare.DataAccess.Repository
         {
             return _context.TimeSlots.FirstOrDefault(t => t.Id == id);
         }
+        public void Update(TimeSlot timeSlot)
+        {
+
+            _context.TimeSlots.Update(timeSlot);
+        }
     }
 }

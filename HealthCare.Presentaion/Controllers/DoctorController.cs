@@ -134,7 +134,7 @@ namespace HealthCare.Presentaion.Controllers
             var timeSlot = doctor.AvailableTimeSlots?.Where(t => t.IsAvailable == true && t.StartTime.Date >= Date.Date).ToList();
             var tmVM = new TimeSlotwithDoctorVM()
             {
-                DoctorName = doctor.FirstName + ' ' + doctor.LastName,
+                DoctorName = doctor.FirstName + doctor.LastName,
                 Address = doctor.OfficeAddress,
                 Contact = doctor.ContactNumber,
                 TimeSlots = timeSlot.ToList()

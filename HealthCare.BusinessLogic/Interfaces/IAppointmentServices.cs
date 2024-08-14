@@ -11,6 +11,7 @@ namespace HealthCare.BusinessLogic.Interfaces
         public void Update(Appointment appointment);
         public void CancleAppointment(int ID);
         public List<Appointment> GetByPatientId(int patientId);
+        public Appointment GetById(int Id);
     }
 }
 

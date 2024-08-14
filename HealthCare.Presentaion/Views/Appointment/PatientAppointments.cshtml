@@ -1,42 +1,100 @@
-﻿@using HealthCare.DataAccess.Models 
+﻿@using HealthCare.DataAccess.Models
 @using HealthCare.DataAccess.Enums
 @model List<Appointment>
- 
-    <p>your appointments</p>
 
-        <table class="table table-bordered table-hover text-center align-middle ">
-            <thead>
+<div class="container my-5">
+    <h3 class="text-center mb-4">Your Appointments</h3>
+
+    <table class="table table-bordered table-hover text-center align-middle table-striped">
+        <thead class="thead-dark bg-primary text-white">
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Doctor Name</th>
+                <th>Specialization</th>
+                <th>Contact Number</th>
+                <th>Office Address</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var appointment in Model)
+            {
                 <tr>
-                     <th>time</th>
-                     <th>status</th>    
-                     <th>doctor name</th>
-                      <th>Specialization</th>
-                       <th>contact number</th>
-                        <th>OfficeAddress</th>
-                        <th>cancle it</th>
+                    <td>@appointment.DateTime.ToString("MMMM dd, yyyy")</td>
+                    <td>@appointment.DateTime.ToString("hh:mm tt")</td>
+                    <td>
+                        @if (appointment.Status == AppointmentStatus.Scheduled)
+                        {
+                            <span class="badge bg-success">Scheduled</span>
+                        }
+                        else if (appointment.Status == AppointmentStatus.Canceled)
+                        {
+                            <span class="badge bg-danger">Canceled</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Unknown</span>
+                        }
+                    </td>
+                    <td>@appointment.Doctor.FirstName @appointment.Doctor.LastName</td>
+                    <td>@appointment.Doctor.Specialization</td>
+                    <td>@appointment.Doctor.ContactNumber</td>
+                    <td>@appointment.Doctor.OfficeAddress</td>
+                    <td>
+                        @if (appointment.Status == AppointmentStatus.Scheduled)
+                        {
+                            <a href="/Appointment/CancleAppointment/@appointment.Id?day=@appointment.DateTime" class="btn btn-danger">
+                                Cancel
+                            </a>
+                        }
+                    </td>
                 </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-            </thead>
-    @foreach (var appointment in Model)
-    {
-        <tr>
-                <td>@appointment.DateTime</td>
-                    <td>@appointment.Status</td>
-                    <td>'@appointment.Doctor.FirstName'  ' @appointment.Doctor.LastName'</td>
-                        <td>@appointment.Doctor.Specialization</td>
-                            <td>@appointment.Doctor.ContactNumber</td>
-                                <td>@appointment.Doctor.OfficeAddress</td>
-                                <td>
-                @if (appointment.Status == AppointmentStatus.Scheduled)
-                {
-                                          <button class="btn btn-primary">
-                                                                            <a  class="text-white" style="text-decoration:none" href="/Appointment/CancleAppointment/@appointment.Id?day=@appointment.DateTime">cancle</a>
-                                        </button>
-                }
-
-                                </td>
-        </tr>
+<style>
+    .table {
+        width: 85%;
+        max-width: 85%;
+        margin: 0 auto;
+        background-color: #e9f7ff; /* Light blue background for the table */
+        border-radius: 8px; /* Rounded corners */
     }
-</table>
-  
 
+        .table thead th {
+            background-color: #007bff; /* Blue header */
+            color: white;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: #d6eaf8; /* Lighter blue on hover */
+    }
+
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid #dee2e6;
+    }
+
+    .badge {
+        font-size: 1rem;
+        padding: 0.5em 0.75em;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+    .container {
+        max-width:

@@ -9,16 +9,26 @@ namespace HealthCare.Presentaion.Controllers
     public class MedicalRecordController : Controller
     {
         private readonly IMedicalRecordService _service;
-
-        public MedicalRecordController(IMedicalRecordService service)
+        private readonly IAppointmentServices _appointmentsService;
+        public MedicalRecordController(IMedicalRecordService service, IAppointmentServices appointmentService)
         {
             _service = service;
+            _appointmentsService = appointmentService;
         }
-        [Authorize(Roles = "Doctor")]       
+        [Authorize(Roles = "Doctor")]
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            return View();
+            var appointment = _appointmentsService.GetById(id);
+            var medicalVm = new MedicalRecordViewModel()
+            {
+                DoctorId = appointment.DoctorId,
+                PatientId = appointment.PatientId,
+                DoctorName = appointment.Doctor.FirstName + appointment.Doctor.LastName,
+                PatientName = appointment.Patient.FirstName + appointment.Patient.LastName,
+                AppointmentDate = appointment.DateTime
+            };
+            return View(medicalVm);
         }
         [Authorize(Roles = "Doctor")]
         [HttpPost]

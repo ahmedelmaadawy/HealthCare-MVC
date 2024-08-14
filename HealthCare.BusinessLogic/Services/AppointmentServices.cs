@@ -36,6 +36,7 @@ namespace HealthCare.BusinessLogic.Services
             if (timeslot != null)
             {
                 timeslot.IsAvailable = false;
+                _context.TimeSlots.Update(timeslot);
                 var appointment = new Appointment()
                 {
                     PatientId = patientId,
@@ -62,6 +63,10 @@ namespace HealthCare.BusinessLogic.Services
         public List<Appointment> GetByPatientId(int patientId)
         {
             return _context.Appointments.GetByPatientId(patientId);
+        }
+        public Appointment GetById(int Id)
+        {
+            return _context.Appointments.GetById(Id);
         }
 
     }

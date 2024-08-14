@@ -39,7 +39,7 @@ namespace HealthCare.DataAccess.Repository
 
         public Appointment GetById(int id)
         {
-            return _context.Appointments.Where(a => a.Id == id).FirstOrDefault();
+            return _context.Appointments.Include(x => x.Doctor).Include(x => x.Patient).Where(a => a.Id == id).FirstOrDefault();
         }
     }
 

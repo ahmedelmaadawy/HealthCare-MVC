@@ -2,39 +2,108 @@
 @using HealthCare.DataAccess.Enums
 @model List<Appointment>
 
-    <p>your appointments</p>
+<div class="container my-5">
+    <h3 class="text-center mb-4">Your Appointments</h3>
 
-        <table class="table table-bordered table-hover text-center align-middle ">
-            <thead>
+    <table class="table table-bordered table-hover text-center align-middle table-striped">
+        <thead class="bg-primary text-white">
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Patient Name</th>
+                <th>Date of Birth</th>
+                <th>Contact Number</th>
+                <th>Gender</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var appointment in Model)
+            {
                 <tr>
-                     <th>time</th>
-                     <th>status</th>    
-                     <th>patient name</th>
-                      <th>date of birth</th>
-                       <th>contact number</th>
-                        <th>gender</th>
-                        <th>mark it as completed</th>
+                    <td>@appointment.DateTime.ToString("MMMM dd, yyyy")</td>
+                    <td>@appointment.DateTime.ToString("hh:mm tt")</td>
+                    <td>
+                        @if (appointment.Status == AppointmentStatus.Scheduled)
+                        {
+                            <span class="badge bg-success">Scheduled</span>
+                        }
+                        else if (appointment.Status == AppointmentStatus.Completed)
+                        {
+                            <span class="badge bg-primary">Completed</span>
+                        }
+                        else if (appointment.Status == AppointmentStatus.Canceled)
+                        {
+                            <span class="badge bg-danger">Canceled</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Unknown</span>
+                        }
+                    </td>
+                    <td>@appointment.Patient.FirstName @appointment.Patient.LastName</td>
+                    <td>@appointment.Patient.DateOfBirth</td>
+                    <td>@appointment.Patient.ContactNumber</td>
+                    <td>@appointment.Patient.Gender</td>
+                    <td>
+                        @if (appointment.Status == AppointmentStatus.Scheduled)
+                        {
+                            <a href="/Appointment/CompletedAppointment/@appointment.Id" class="btn btn-primary text-white" style="text-decoration:none;">
+                                Mark as Completed
+                            </a>
+                        }
+                    </td>
                 </tr>
-               
-            </thead>
-@foreach(var appointment in Model)
-{
-    <tr>
-            <td>@appointment.DateTime</td>
-            <td>@appointment.Status</td>
-            <td>@appointment.Patient.FirstName @appointment.Patient.LastName</td>
-            <td>@appointment.Patient.DateOfBirth</td>
-            <td>@appointment.Patient.ContactNumber</td>
-            <td>@appointment.Patient.Gender</td>
-            <td>
-                 @if (appointment.Status == AppointmentStatus.Scheduled)
-                    {
-                    <button class="btn btn-primary">
-                     <a  class="text-white" style="text-decoration:none" href="/Appointment/CompletedAppointment/@appointment.Id">copmlete</a>
-                     </button>
-                  }
-                
-            </td>
-    </tr>
-}
-</table>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .table {
+        width: 85%;
+        max-width: 85%;
+        margin: 0 auto;
+        background-color: #e9f7ff; /* Light blue background for the table */
+        border-radius: 8px; /* Rounded corners */
+    }
+
+    .bg-primary {
+        background-color: #007bff !important; /* Blue header */
+    }
+
+    .table thead th {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #d6eaf8; /* Lighter blue on hover */
+    }
+
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid #dee2e6;
+    }
+
+    .badge {
+        font-size: 1rem;
+        padding: 0.5em 0.75em;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+    .container {
+        max-width: 1000px;
+    }
+</style>
