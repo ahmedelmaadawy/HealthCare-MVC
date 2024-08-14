@@ -14,4 +14,12 @@
     <p>Details: @Model.Description</p>
     <p>Details: @Model.Prescription</p>
 </div>
-<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+@if(User.IsInRole("Patient"))
+{
+    <a asp-action="ViewPatientMedicalRecords" asp-route-id="@Model.PatientId" class="btn btn-secondary">Back to List</a>
+}
+else if (User.IsInRole("Doctor"))
+{
+    <a asp-action="ViewDoctorMedicalRecords" asp-route-id="@Model.DoctorId" class="btn btn-secondary">Back to List</a>
+
+}

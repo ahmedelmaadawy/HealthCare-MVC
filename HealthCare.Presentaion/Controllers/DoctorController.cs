@@ -123,7 +123,7 @@ namespace HealthCare.Presentaion.Controllers
 
                 _service.AddTimeSlot(timeSlot);
 
-                return RedirectToAction("Details", new { id = model.DoctorID });
+                return RedirectToAction("DisplayTimeSlots", new { id = model.DoctorID, Date = DateTime.Now });
             }
             return View("AddTimeSlot", model);
         }

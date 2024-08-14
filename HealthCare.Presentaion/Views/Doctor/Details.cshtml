@@ -46,7 +46,11 @@
     </div>
     <div class="card-footer text-center">
         <a asp-action="Index" class="btn btn-success">Back to List</a>
-        <a asp-action="DisplayTimeSlots" asp-route-id="@Model.Id" asp-route-Date="@DateTime.Now" asp-controller="Doctor" class="btn btn-Primary">Available Appoinntments</a>
+        @if (!User.IsInRole("Doctor"))
+        {
+            <a asp-action="DisplayTimeSlots" asp-route-id="@Model.Id" asp-route-Date="@DateTime.Now" asp-controller="Doctor" class="btn btn-primary">Available Appoinntments</a>
+
+        }
 
     </div>
 
