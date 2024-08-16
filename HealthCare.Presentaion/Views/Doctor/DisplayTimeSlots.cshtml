@@ -13,11 +13,11 @@
         @foreach (var item in Model.TimeSlots)
         {
             <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Appointment</h5>
-                    <p class="card-text"><strong>Date:</strong> @item.StartTime.ToShortDateString()</p>
-                    <p class="card-text"><strong>Time:</strong> @item.StartTime.ToString("hh\\:mm tt")</p>
-                    <a class="btn btn-primary" asp-action="BookNewAppointment" asp-controller="Appointment" asp-route-patientId="@User.Claims.FirstOrDefault(c=>c.Type =="PatientId")?.Value" asp-route-timeslotId="@item.Id">Book Appointment</a>
+                <div class="card-body" style="border-radius:10px;border:2px solid#3b73af;">
+                @*    < h5 class="card-title" style="display:inline-block;margin-left:20px">Appointment</h5> *@
+                    <p class="card-text" style="display:inline-block;margin-left:20px;font-size:30px;color:black"><strong>Date:</strong> @item.StartTime.ToShortDateString()</p>
+                    <p class="card-text" style="display:inline-block;margin-left:20px;"><strong>Time:</strong> @item.StartTime.ToString("hh\\:mm tt")</p>
+                    <a style="display:inline-block;margin-left:20px" class="btn btn-primary" asp-action="BookNewAppointment" asp-controller="Appointment" asp-route-patientId="@User.Claims.FirstOrDefault(c=>c.Type =="PatientId")?.Value" asp-route-timeslotId="@item.Id">Book Appointment</a>
                 </div>
             </div>
         }
