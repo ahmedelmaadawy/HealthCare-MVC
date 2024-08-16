@@ -19,8 +19,8 @@ namespace HealthCare.Presentaion.Mapper
             CreateMap<Patient, PatientToEditVM>();
             CreateMap<AddingMedicalRecordVM, MedicalRecord>().ForMember(m => m.Date, opt => opt.MapFrom(x => x.AppointmentDate));
             CreateMap<MedicalRecord, MedicalRecordViewModel>().ForMember(m => m.AppointmentDate, opt => opt.MapFrom(x => x.Date))
-                .ForMember(vm => vm.DoctorName, opt => opt.MapFrom(x => string.Join(' ', x.Doctor.FirstName, x.Doctor.FirstName)))
-                .ForMember(vm => vm.PatientName, opt => opt.MapFrom(x => string.Join(' ', x.Patient.FirstName, x.Patient.FirstName)));
+                .ForMember(vm => vm.DoctorName, opt => opt.MapFrom(x => string.Join(' ', x.Doctor.FirstName, x.Doctor.LastName)))
+                .ForMember(vm => vm.PatientName, opt => opt.MapFrom(x => string.Join(' ', x.Patient.FirstName, x.Patient.LastName)));
 
         }
 

@@ -31,6 +31,7 @@
                     {
                         <span class="navbar-text text-light me-2 fs-5" style="font-size:100px">Welcome, @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value</span>
                         <a href="#" class="nav-link text-white me-4 fs-5">Profile</a>
+
                     }
                     <div>
                         @if (!User.Identity.IsAuthenticated)

@@ -57,8 +57,18 @@ namespace HealthCare.Presentaion.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+
             var doctor = await _service.GetById(id);
-            return View(doctor);
+            var userid = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (userid == doctor.UserId)
+            {
+                return View(doctor);
+
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
 
         [Authorize(Roles = "Doctor")]
