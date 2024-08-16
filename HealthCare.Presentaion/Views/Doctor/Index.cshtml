@@ -4,7 +4,7 @@
     ViewData["Title"] = "All Doctors";
 } 
 
-<h1 class="mt-3 fw-bold">All Doctors</h1>
+<h1 class="mt-3 ">All Doctors</h1>
 
 <form asp-action="Index" method="get">
     <div class="form-group mb-5">
@@ -51,7 +51,7 @@
                 @Html.DisplayFor(modelItem => item.OfficeAddress)
             </td>
             <td>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn " style="background-color:#a0c4ff">Details</a>
                     @if (User.IsInRole("Admin"))
                     {
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>

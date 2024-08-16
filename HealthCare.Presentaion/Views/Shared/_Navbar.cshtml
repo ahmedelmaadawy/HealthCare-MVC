@@ -1,6 +1,6 @@
 ﻿@using System.Security.Claims
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark  shadow-sm" style="background-color:#3b73af">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <h2 class="mb-0 text-white">Medicnova</h2>
@@ -10,7 +10,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
                 <div class="navbar-nav text-center" id="NavElements">
-                    <a asp-action="Index" asp-controller="Doctor" class="nav-link text-white fs-5">Doctors</a>
+                    <a asp-action="Index" asp-controller="Doctor" class="nav-link text-white fs-5" style="margin-left:250px">Doctors</a>
                     @if (User.Identity.IsAuthenticated)
                     {
                         if (User.IsInRole("Doctor"))
@@ -29,18 +29,18 @@
                 <div class="navbar-nav ms-auto d-flex align-items-center">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <span class="navbar-text text-light me-2 fs-5">Welcome, @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value</span>
+                        <span class="navbar-text text-light me-2 fs-5" style="font-size:100px">Welcome, @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value</span>
                         <a href="#" class="nav-link text-white me-4 fs-5">Profile</a>
                     }
                     <div>
                         @if (!User.Identity.IsAuthenticated)
                         {
-                            <a asp-action="Login" asp-controller="Account" class="btn btn-success me-2" id="LogInBtn">Login</a>
-                            <a asp-action="Register" asp-controller="Account" class="btn btn-success me-4" id="RegBtn">Register</a>
+                            <a asp-action="Login" asp-controller="Account" class="btn  me-2 " style="background-color:#1E88E5" id="LogInBtn">Login</a>
+                            <a asp-action="Register" asp-controller="Account" class="btn btn-success me-4" id="RegBtn" style="background-color: #4CAF50">Register</a>
                         }
                         else
                         {
-                            <a asp-action="Logout" asp-controller="Account" class="btn btn-danger" id="LogOutBtn">Logout</a>
+                            <a asp-action="Logout" asp-controller="Account" class="btn btn-danger" id="LogOutBtn" style="background-color:#f57c00">Logout</a>
                         }
                     </div>
                 </div>

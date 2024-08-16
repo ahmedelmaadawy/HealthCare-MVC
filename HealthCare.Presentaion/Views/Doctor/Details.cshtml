@@ -4,10 +4,10 @@
     ViewData["Title"] = "Details";
 }
 
-<h1 class="text-center text-primary mb-4">Doctor Details</h1>
+<h1 class="text-center  mb-4">Doctor Details</h1>
 
 <div class="card mx-auto border-0 shadow-lg" style="max-width: 600px;">
-    <div class="card-header bg-primary text-white text-center">
+    <div class="card-header  text-white text-center" style="background-color:#3b73af">
         <h4 class="mb-0">Doctor Information</h4>
     </div>
     <div class="card-body bg-light">
@@ -44,8 +44,8 @@
             </dd>
         </dl>
     </div>
-    <div class="card-footer text-center bg-primary">
-        <a asp-action="Index" class="btn btn-dark text-light me-2">Back to List</a>
+    <div class="card-footer text-center " style="background-color:#3b73af">
+        <a asp-action="Index" class="btn  text-light me-2" style="background-color:#a0c4ff">Back to List</a>
         @if (!User.IsInRole("Doctor"))
         {
             <a asp-action="DisplayTimeSlots" asp-route-id="@Model.Id" asp-route-Date="@DateTime.Now" asp-controller="Doctor" class="btn btn-success">Available Appointments</a>
