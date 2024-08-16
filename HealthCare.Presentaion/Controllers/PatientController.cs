@@ -81,7 +81,7 @@ namespace HealthCare.Presentaion.Controllers
                 try
                 {
                     await _service.Update(patient);
-                    return RedirectToAction("Details", new { id = patient.Id });
+                    return RedirectToAction("Index", "Doctor");
                 }
                 catch (ArgumentException)
                 {

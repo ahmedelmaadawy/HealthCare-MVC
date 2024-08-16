@@ -5,44 +5,37 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Patient</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<h1>Add Your Data</h1>
         <form asp-action="Create">
             <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
+                <label asp-for="FirstName"></label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
+                <label asp-for="LastName"></label>
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateOfBirth" class="control-label"></label>
+                <label asp-for="DateOfBirth"></label>
                 <input asp-for="DateOfBirth" class="form-control" type="date" />
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Gender" class="control-label"></label>
-                <select class="form-select" title="Specialization" asp-for="@Model.Gender" asp-items="Html.GetEnumSelectList<Gender>()">
-                    <option selected disabled> </option>
+                <select class="form-select" title="Specialization" asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()">
                 </select>
-
             </div>
             <div class="form-group">
-                <label asp-for="ContactNumber" class="control-label"></label>
+                <label asp-for="ContactNumber"></label>
                 <input asp-for="ContactNumber" class="form-control" />
                 <span asp-validation-for="ContactNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Adderss" class="control-label"></label>
+                <label asp-for="Adderss"></label>
                 <input asp-for="Adderss" class="form-control" />
                 <span asp-validation-for="Adderss" class="text-danger"></span>
             </div>
@@ -50,12 +43,64 @@
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<style>
+    .container {
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+        margin-top: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+
+    .form-control {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .text-danger {
+        color: #d9534f;
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border-radius: 4px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+</style>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

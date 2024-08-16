@@ -1,52 +1,17 @@
 ﻿@model List<MedicalRecordViewModel>
 @{
-    ViewData["Title"] = "ViewPatientMedicalRecords";
+    ViewData["Title"] = "Medical Records";
 }
-
-
-
-@* 
-<h2>Patient's Medical Records</h2>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Record ID</th>
-            <th>Doctor Name</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Prescription</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var record in Model)
-        {
-            <tr>
-                <td>@record.Id</td>
-                <td>@record.DoctorName</td>
-                <td>@record.AppointmentDate</td>
-                <td>@record.Description</td>
-                <td>@record.Prescription</td>
-                <td>
-                    <a asp-action="ViewMedicalRecord" asp-route-id="@record.Id">View</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table> *@
-
 
 <link rel="stylesheet" type="text/css" href="~/css/site.css" />
 
-<h2 id="doch2">Doctor's Medical Records</h2>
+<h2 id="doch2" class="text-center m-3">Your Medical Records</h2>
 
 <div class="records-container">
     @foreach (var record in Model)
     {
         <div class="record-card">
-            <h3>@record.DoctorName</h3>
-            <p><strong>Doctor:</strong> @record.DoctorName</p>
+            <h3>Doctor : @record.DoctorName</h3>
             <p><strong>Date:</strong> @record.AppointmentDate.ToString("MMMM dd, yyyy")</p>
             <p><strong>Description:</strong> @record.Description</p>
             <p><strong>Prescription:</strong> @record.Prescription</p>
@@ -55,8 +20,12 @@
     }
 </div>
 <style>
-    #doch2{
-        text-align:center;
-        margin:20px;
+    .record-card p {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
     }
+
 </style>

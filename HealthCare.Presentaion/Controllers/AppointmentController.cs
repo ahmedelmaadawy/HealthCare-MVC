@@ -42,6 +42,7 @@ namespace HealthCare.Presentaion.Controllers
         public async Task<IActionResult> PatientAppointments(int ID)
         {
             var model = await _services.GetByPatientId(ID);
+            model = model.OrderByDescending(a => a.DateTime).ToList();
             return View(model);
 
         }

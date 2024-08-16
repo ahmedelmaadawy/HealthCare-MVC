@@ -4,16 +4,17 @@
 }
 
 <div class="card mx-auto my-4" style="max-width: 600px;">
-    <div class="card-header bg-primary text-white">
+    <div class="card-header" style="background-color: #3B73AF; color: #FFFFFF;">
         Medical Record Details
     </div>
     <div class="card-body">
         <h5 class="card-title text-info">Record ID: @Model.Id</h5>
-        <p class="card-text"><strong>Patient Name:</strong> @Model.PatientName</p>
-        <p class="card-text"><strong>Doctor Name:</strong> @Model.DoctorName</p>
-        <p class="card-text"><strong>Date:</strong> @Model.AppointmentDate.ToString("MMMM dd, yyyy")</p>
-        <p class="card-text"><strong>Description:</strong> @Model.Description</p>
-        <p class="card-text"><strong>Prescription:</strong> @Model.Prescription</p>
+        <p class="card-text" style="color: black;"><strong>Patient Name:</strong> @Model.PatientName</p>
+        <p class="card-text" style="color: black;"><strong>Doctor Name:</strong> @Model.DoctorName</p>
+        <p class="card-text" style="color: black;"><strong>Date:</strong> @Model.AppointmentDate.ToString("MMMM dd, yyyy")</p>
+        <p class="card-text" style="color: black;"><strong>Description:</strong> @Model.Description</p>
+        <p class="card-text" style="color: black;"><strong>Prescription:</strong> @Model.Prescription</p>
+
     </div>
     <div class="card-footer text-center">
         @if (User.IsInRole("Patient"))
@@ -26,19 +27,4 @@
         }
     </div>
 </div>
-
-<style>
-    .card {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-    }
-
-    .card-header {
-        font-size: 1.25rem;
-        font-weight: bold;
-        border-bottom: 1px solid #007bff;
-    }
-
-    .card-title {
-
 
