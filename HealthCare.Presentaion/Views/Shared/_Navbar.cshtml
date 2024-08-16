@@ -1,0 +1,50 @@
+﻿@using System.Security.Claims
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <h2 class="mb-0 text-white">Medicnova</h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+                <div class="navbar-nav text-center" id="NavElements">
+                    <a asp-action="Index" asp-controller="Doctor" class="nav-link text-white fs-5">Doctors</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Doctor"))
+                        {
+                            <a asp-action="GetAllByDay" asp-controller="Appointment" asp-route-day="@DateTime.Now" asp-route-doctorID="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="nav-link text-white fs-5">Appointments</a>
+                            <a asp-action="ViewDoctorMedicalRecords" asp-controller="MedicalRecord" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="nav-link text-white fs-5">Medical Records</a>
+                            <a asp-action="AddTimeSlot" asp-controller="Doctor" asp-route-DoctorId="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="nav-link text-white fs-5">Add Time Slot</a>
+                        }
+                        else if (User.IsInRole("Patient"))
+                        {
+                            <a asp-action="PatientAppointments" asp-controller="Appointment" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="nav-link text-white fs-5">Appointments</a>
+                            <a asp-action="ViewPatientMedicalRecords" asp-controller="MedicalRecord" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="nav-link text-white fs-5">Medical Records</a>
+                        }
+                    }
+                </div>
+                <div class="navbar-nav ms-auto d-flex align-items-center">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span class="navbar-text text-light me-2 fs-5">Welcome, @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value</span>
+                        <a href="#" class="nav-link text-white me-4 fs-5">Profile</a>
+                    }
+                    <div>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a asp-action="Login" asp-controller="Account" class="btn btn-success me-2" id="LogInBtn">Login</a>
+                            <a asp-action="Register" asp-controller="Account" class="btn btn-success me-4" id="RegBtn">Register</a>
+                        }
+                        else
+                        {
+                            <a asp-action="Logout" asp-controller="Account" class="btn btn-danger" id="LogOutBtn">Logout</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

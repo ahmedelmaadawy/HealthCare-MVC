@@ -4,11 +4,30 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HealthCare.Presentaion</title>
+    <title>@ViewData["Title"] HealthCare</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Style.css" asp-append-version="true" />
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/nice-select.css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/icofont.css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css">
+    <link rel="stylesheet" href="~/css/owl-carousel.css">
+    <link rel="stylesheet" href="~/css/datepicker.css">
+    <link rel="stylesheet" href="~/css/animate.min.css">
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+
+
+
+    <!-- Medipro CSS -->
+    <link rel="stylesheet" href="~/css/normalize.css">
+    <link rel="stylesheet" href="~/css/styleM.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
 
     <link rel="stylesheet" href="~/HealthCare.Presentaion.styles.css" asp-append-version="true" />
     <title>Medicnova</title>
@@ -22,53 +41,7 @@
 
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg bg-primary ">
-            <div class="container-fluid">
-                <a class="navbar-brand text-white" <h2>Medicnova</h2></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav me-auto " id="NavElements">
-                        <a asp-action="Index" asp-controller="Doctor" class="nav-link text-white" >Doctors</a>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            if (User.IsInRole("Doctor") )
-                            {
-                                <a asp-action="GetAllByDay" asp-controller="Appointment" asp-route-day ="@DateTime.Now" asp-route-doctorID="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="nav-link text-white" >Appointments</a>
-                                <a asp-action="ViewDoctorMedicalRecords"  asp-controller="MedicalRecord" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="nav-link text-white">Medical Records</a>
-                                <a asp-action="AddTimeSlot" asp-controller="Doctor" asp-route-DoctorId="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="nav-link text-white">Add Available Appointment</a>
-
-                            }
-                            else if (User.IsInRole("Patient"))
-                            {
-                                <a asp-action="PatientAppointments" asp-controller="Appointment" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="nav-link text-white">Appointments</a>
-                                <a asp-action="ViewPatientMedicalRecords" asp-controller="MedicalRecord" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="nav-link text-white" >Medical Records</a>
-                                
-                            }
- 
-                        }
-
-                    </div>
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-
-                        <div class="d-flex">
-                            <a asp-action="Login" asp-controller="Account" class="btn btn-success mr-2" type="button" id="LogInBtn">Login</a>
-                            <a asp-action="Register" asp-controller="Account" class="btn btn-success me-4" type="button" id="RegBtn">Register</a>
-                        </div>
-                    }else
-                    {
-                    <div class="d-flex">
-                        <a asp-action="Logout" asp-controller="Account" class="btn btn-danger mr-2" type="button" id="LogInBtn">Logout</a>
-                        
-                    </div>
-                    }
-                </div>
-            </div>
-        </nav>
-    </header>
+    @await Html.PartialAsync("_Navbar.cshtml")
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -76,6 +49,27 @@
     </div>
 
 
+    <!-- jquery Min JS -->
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/jquery-migrate-3.0.0.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/easing.js"></script>
+    <script src="~/js/colors.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap-datepicker.js"></script>
+    <script src="~/js/jquery.nav.js"></script>
+    <script src="~/js/slicknav.min.js"></script>
+    <script src="~/js/jquery.scrollUp.min.js"></script>
+    <script src="~/js/niceselect.js"></script>
+    <script src="~/js/tilt.jquery.min.js"></script>
+    <script src="~/js/owl-carousel.js"></script>
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <script src="~/js/steller.js"></script>
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/main.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

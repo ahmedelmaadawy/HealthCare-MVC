@@ -1,48 +1,11 @@
-﻿@* @model List<MedicalRecordViewModel>
+﻿@model List<MedicalRecordViewModel>
 @{
-    ViewData["Title"] = "ViewDoctorMedicalRecords";
-}
-
-
-
-<h2>Doctor's Medical Records</h2>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Record ID</th>
-            <th>Patient Name</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Prescription</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var record in Model)
-        {
-            <tr>
-                <td>@record.Id</td>
-                <td>@record.PatientName</td>
-                <td>@record.AppointmentDate</td>
-                <td>@record.Description</td>
-                <td>@record.Prescription</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@record.Id">View</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
- *@
- @model List<MedicalRecordViewModel>
-@{
-    ViewData["Title"] = "ViewDoctorMedicalRecords";
+    ViewData["Title"] = "Medical Records";
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/site.css" />
 
-<h2 id="doch2">Doctor's Medical Records</h2>
+<h2 id="doch2">Your Medical Records</h2>
 
 <div class="records-container">
     @foreach (var record in Model)
@@ -57,9 +20,3 @@
         </div>
     }
 </div>
-<style>
-    #doch2{
-        text-align:center;
-        margin:20px;
-    }
-</style>
