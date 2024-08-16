@@ -12,6 +12,7 @@ namespace HealthCare.BusinessLogic.Interfaces
         public Task CancleAppointment(int ID);
         public Task<List<Appointment>> GetByPatientId(int patientId);
         public Task<Appointment> GetById(int Id);
+        public Task<List<Appointment>> GetAllByDoctorId(int doctorId);
     }
 }
 

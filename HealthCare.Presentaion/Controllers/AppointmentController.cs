@@ -17,6 +17,20 @@ namespace HealthCare.Presentaion.Controllers
             var model = await _services.GetAllByDay(doctorID, day);
             return View("GetAllAppointmentsForThatDay", model);
         }
+        public async Task<IActionResult> GetPrevious(int doctorID)
+        {
+            var all = await _services.GetAllByDoctorId(doctorID);
+            var model = all.Where(a => a.DateTime.Day < DateTime.Now.Day).ToList();
+            return View("GetAllAppointmentsForThatDay", model);
+        }
+        public async Task<IActionResult> GetUpcomming(int doctorID)
+        {
+            var all = await _services.GetAllByDoctorId(doctorID);
+            var model = all.Where(a => a.DateTime.Day > DateTime.Now.Day).ToList();
+
+            return View("GetAllAppointmentsForThatDay", model);
+        }
+
         [Authorize(Roles = "Doctor")]
         public async Task<IActionResult> CompletedAppointment(int Id)
         {

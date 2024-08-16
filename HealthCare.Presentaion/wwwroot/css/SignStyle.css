@@ -1,0 +1,135 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    background-image: linear-gradient(rgba(0,0,50,0.8),rgba(0,0,50,0.8)),url(Images/recep2.jpg);
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center bottom;
+    position: relative;
+}
+
+.Box{
+    position: absolute;
+    width: 450px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgba(255, 255, 255, 0.781);
+    padding: 30px 50px;
+    text-align: center;
+}
+.Box h2{
+    color: rgba(0,0,50) ;
+    font-size: 30px;
+}
+
+.Box h2::after{
+    content: "";
+    width: 25%;
+    height: 4px;
+    border-radius: 5px;
+    background-color: rgba(0,0,50) ;
+    position: absolute;
+    display: block;
+    margin: 10px 0 ;
+    left: 50%;    
+    transform: translateX(-50%);
+}
+
+.Box form{
+    margin-top: 30px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.inBox{
+
+    width: 100%;
+    height: 50px;
+    width: 80%;
+    background-color: rgb(190, 190, 190);
+    margin: 15px 0;
+    padding-top: 10px;
+    border-radius: 5px;
+
+}
+.inBox i{
+    font-size: 20px;
+    margin-right: 15px;
+    color: rgba(0, 0, 0, 0.612);
+}
+
+.inBox input{
+background-color: transparent;
+HEIGHT: 30PX;
+width: 80%;
+border: none;
+outline: none;
+font-size: 18px;
+}
+#Forget{
+    margin-top: -10px;
+    margin-left: -70px;
+    /* margin-bottom: 25px; */
+font-size: 14px;
+color: rgba(0, 0, 0, 0.402);
+}
+#Forget a{
+    text-decoration: none;
+    color: rgb(0, 10, 116);
+}
+
+
+#sel{
+    background-color:transparent ;
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    margin: 10px 0 ;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* 
+.btns{
+
+}
+button{
+    border: none;
+outline: none;
+width: 100px;
+height: 40px;
+border-radius: 10px;
+font-size: 18px;
+margin: 0 5px 40px 5px;
+}
+
+#reg{
+}
+
+.active{
+    background-color: rgba(0,0,50) ;
+    color: white;
+} */
+
+.submit input{
+    width: 300px;
+    height:50px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 40px 0 20px 0 ;
+}
+
+.submit input:hover {
+    background-color: rgba(0,0,50);
+    color: white;
+}

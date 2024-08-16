@@ -1,9 +1,11 @@
 ﻿@model TimeSlotwithDoctorVM
 
+
+
 <div class="container my-5">
     <div class="card bg-light text-dark shadow-lg">
         <div class="card-body text-center">
-            <h1 class="card-title">@Model.DoctorName</h1>
+            <h1 class="card-title">@Model.DoctorName's Available Appointments </h1>
             <p class="card-text"><strong>Address:</strong> @Model.Address</p>
             <p class="card-text"><strong>Contact:</strong> @Model.Contact</p>
         </div>
@@ -14,10 +16,12 @@
         {
             <div class="card mb-3">
                 <div class="card-body" style="border-radius:10px;border:2px solid#3b73af;">
-                @*    < h5 class="card-title" style="display:inline-block;margin-left:20px">Appointment</h5> *@
-                    <p class="card-text" style="display:inline-block;margin-left:20px;font-size:30px;color:black"><strong>Date:</strong> @item.StartTime.ToShortDateString()</p>
-                    <p class="card-text" style="display:inline-block;margin-left:20px;"><strong>Time:</strong> @item.StartTime.ToString("hh\\:mm tt")</p>
-                    <a style="display:inline-block;margin-left:20px" class="btn btn-primary" asp-action="BookNewAppointment" asp-controller="Appointment" asp-route-patientId="@User.Claims.FirstOrDefault(c=>c.Type =="PatientId")?.Value" asp-route-timeslotId="@item.Id">Book Appointment</a>
+                    <p class="card-text" style="display:inline-block;margin-left:20px;font-size:25px;color:black"><strong>Date:</strong> @item.StartTime.ToString("MMMM dd, yyyy")</p>
+                    <p class="card-text" style="display:inline-block;margin-left:20px;font-size:25px;color:black"><strong>Time:</strong> @item.StartTime.ToString("hh\\:mm tt")</p>
+                    @if (User.IsInRole("Patient"))
+                    {
+                        <a style="display:inline-block;margin-left:20px" class="btn btn-primary" asp-action="BookNewAppointment" asp-controller="Appointment" asp-route-patientId="@User.Claims.FirstOrDefault(c=>c.Type =="PatientId")?.Value" asp-route-timeslotId="@item.Id">Book Appointment</a>
+                    }
                 </div>
             </div>
         }

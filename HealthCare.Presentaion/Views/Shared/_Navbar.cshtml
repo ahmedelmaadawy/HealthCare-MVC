@@ -10,7 +10,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
                 <div class="navbar-nav text-center" id="NavElements">
-                    <a asp-action="Index" asp-controller="Doctor" class="nav-link text-white fs-5" style="margin-left:250px">Doctors</a>
+                    <a asp-action="Index" asp-controller="Doctor" class="nav-link text-white fs-5" style="margin-left:150px">Doctors</a>
                     @if (User.Identity.IsAuthenticated)
                     {
                         if (User.IsInRole("Doctor"))
@@ -29,7 +29,7 @@
                 <div class="navbar-nav ms-auto d-flex align-items-center">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <span class="navbar-text text-light me-2 fs-5" style="font-size:100px">Welcome, @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value</span>
+                        <span class="navbar-text text-light me-2 fs-5" style="font-size:100px">@User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value</span>
                         <a asp-action="Index" asp-controller="Profile" class="nav-link text-white me-4 fs-5">Profile</a>
 
                     }
@@ -41,7 +41,7 @@
                         }
                         else
                         {
-                            <a asp-action="Logout" asp-controller="Account" class="btn btn-danger" id="LogOutBtn" style="background-color:#f57c00">Logout</a>
+                            <a asp-action="Logout" asp-controller="Account" class="btn btn-danger" id="LogOutBtn">Logout</a>
                         }
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 ﻿using HealthCare.BusinessLogic.Interfaces;
 using HealthCare.BusinessLogic.ViewModels.TimeSlotVMs;
+using HealthCare.DataAccess.Enums;
 using HealthCare.DataAccess.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,13 +17,18 @@ namespace HealthCare.Presentaion.Controllers
             _service = service;
         }
         [AllowAnonymous]
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString, string specialization = "All")
         {
 
             var doctors = await _service.GetAll();
-
+            if (specialization != "All")
+            {
+                Specialization s = (Specialization)int.Parse(specialization);
+                doctors = doctors.Where(d => d.Specialization == s.ToString()).ToList();
+            }
             if (!string.IsNullOrEmpty(searchString))
             {
+
                 doctors = doctors.Where(d => d.FullName.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
             }
 

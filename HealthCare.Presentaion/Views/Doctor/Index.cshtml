@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DoctorToDisplayVM>
+﻿@using HealthCare.DataAccess.Enums
+@model IEnumerable<DoctorToDisplayVM>
 
  @{
     ViewData["Title"] = "All Doctors";
@@ -9,11 +10,14 @@
 <form asp-action="Index" method="get">
     <div class="form-group mb-5">
         <input type="text" style="width:300px;" name="searchString" value="@ViewData["CurrentFilter"]" class="form-control d-inline-block" placeholder="Search by Name" />
-        <button type="submit" class="ml-3 btn btn-primary d-inline-block">Search</button>
-
+        <select class="form-select d-inline-block ml-3"  style="width:150px;" title="Specialization"  name="specialization" asp-items="Html.GetEnumSelectList<Specialization>()">
+            <option value="All" selected>All</option>
+        </select>
+        <button type="submit" class="ml-3 btn btn-primary d-inline-block">Filter</button>
     </div>
-
 </form>
+
+
 
 <table class="table">
     <thead>

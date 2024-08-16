@@ -2,10 +2,20 @@
 @using HealthCare.DataAccess.Enums
 @model List<Appointment>
 
-<div class="container my-5">
+<div class="conrainer my-5">
     <h3 class="text-center mb-4">Your Appointments</h3>
+    @if (User.IsInRole("Doctor"))
+    {
+        
+    <div class="text-center m-5"> 
+        <a class="btn btn-primary" style="background-color:#3b73af" asp-action="GetPrevious"  asp-route-doctorID="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value">Previous Appointments</a>
+        <a class="btn btn-primary" style="background-color:#3b73af" asp-action="GetUpcomming" asp-route-doctorID="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" >UpComming Appointments</a>
+        <a class="btn btn-primary" style="background-color:#3b73af" asp-action="GetAllByDay" asp-route-day="@DateTime.Now" asp-route-doctorID="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value">Today's Appointments</a>
 
-    <table class="table table-bordered table-hover text-center align-middle table-striped">
+    </div>
+    }
+
+    <table class="table table-bordered table-hover text-center align-middle table-striped " style="width:1200px;">
         <thead class="bg-primary text-white">
             <tr>
                 <th style="background-color:#3b73af">Date</th>

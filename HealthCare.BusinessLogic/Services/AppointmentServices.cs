@@ -17,6 +17,11 @@ namespace HealthCare.BusinessLogic.Services
             _mapper = mapper;
         }
 
+        public async Task<List<Appointment>> GetAllByDoctorId(int doctorId)
+        {
+            var Appointments = await _context.Appointments.GetByDoctorId(doctorId);
+            return Appointments;
+        }
         public async Task<List<Appointment>> GetAllByDay(int doctorId, DateTime day)
         {
             var Appointments = await _context.Appointments.GetByDoctorId(doctorId);
