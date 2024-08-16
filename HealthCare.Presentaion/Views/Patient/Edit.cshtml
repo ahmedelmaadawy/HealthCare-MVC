@@ -3,10 +3,8 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<h2>Update Your Data</h2>
 
-<h1>Edit</h1>
-
-<h4>Patient</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -54,7 +52,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-controller="Doctor" class="btn btn-primary">Back to List</a>
 </div>
 
 @section Scripts {

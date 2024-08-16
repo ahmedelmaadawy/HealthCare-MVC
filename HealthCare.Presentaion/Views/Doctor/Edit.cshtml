@@ -1,22 +1,19 @@
-﻿@model Doctor
+﻿@using HealthCare.DataAccess.Enums
+@model Doctor
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Doctor</h4>
+<h2>Update Your Data</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
+                <input asp-for="Id" value="@Model.Id" type="hidden" class="form-control" />
+            <input asp-for="UserId" value="@Model.UserId" type="hidden" class="form-control" />
+
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
@@ -29,8 +26,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Specialization" class="control-label"></label>
-                <input asp-for="Specialization" class="form-control" />
-                <span asp-validation-for="Specialization" class="text-danger"></span>
+                <select class="form-select" title="Specialization" asp-for="@Model.Specialization" asp-items="Html.GetEnumSelectList<Specialization>()">
+                    <option selected disabled> </option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="ContactNumber" class="control-label"></label>
@@ -49,9 +47,6 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
