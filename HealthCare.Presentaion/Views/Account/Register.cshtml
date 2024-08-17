@@ -12,30 +12,33 @@
         <h2 id="header">Register</h2>
         <form asp-action="Register">
 
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <div style="color:red;" asp-validation-summary="All" class="text-danger"></div>
 
             <div class="inBox form-group" id="fname">
                 <i class="fa-regular fa-user"></i>
                 <input type="text" placeholder="User Name" name="UserName" asp-for="UserName" class="form-control">
             </div>
+            <span style="color:red;display:block;" asp-validation-for="UserName" class="text-danger"></span>
+
 
             <div class="inBox  form-group" id="email">
                 <i class="fa-solid fa-envelope"></i>
                 <input type="email" placeholder="Email" name="email" asp-for="Email" class="form-control">
-                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+            <span style="color:red;display:block;" asp-validation-for="Email" class="text-danger"></span>
 
 
             <div class="inBox form-group" id="pass">
                 <i class="fa-solid fa-lock"></i>
                 <input type="password" placeholder="Password" name="password" asp-for="Password" class="form-control">
-                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+            <span style="color:red;display:block;" asp-validation-for="Password" class="text-danger"></span>
 
             <div class="inBox form-group" id="lname">
                 <i class="fa-solid fa-lock"></i>
                 <input type="password" placeholder="Confirm Pasword" name="ConfirmPassword" asp-for="ConfirmPassword" class="form-control">
             </div>
+            <span style="color:red;display:block;" asp-validation-for="ConfirmPassword" class="text-danger"></span>
 
 
             <div id="select" class="form-group">

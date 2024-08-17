@@ -49,7 +49,7 @@ namespace HealthCare.Presentaion.Controllers
         public async Task<IActionResult> CancleAppointment(int Id)
         {
             await _services.CancleAppointment(Id);
-            return RedirectToAction(nameof(PatientAppointments), new { id = Id });
+            return RedirectToAction(nameof(PatientAppointments), new { id = User.Claims.FirstOrDefault(c => c.Type == "PatientId").Value });
         }
         [Authorize(Roles = "Patient")]
         public async Task<IActionResult> BookNewAppointment(int timeslotId, int patientId)

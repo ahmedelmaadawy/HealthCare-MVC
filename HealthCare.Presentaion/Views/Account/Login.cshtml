@@ -11,20 +11,21 @@
         <h2 id="header">Login</h2>
         <form asp-action="Login">
 
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <div asp-validation-summary="All" style="color:red"  class="text-danger"></div>
 
             <div class="inBox  form-group" id="email">
                 <i class="fa-solid fa-envelope"></i>
                 <input type="email" placeholder="Email" name="email" asp-for="Email" class="form-control">
-                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+            <span style="color:red" asp-validation-for="Email" class="text-danger d-block"></span>
 
 
             <div class="inBox form-group" id="pass">
                 <i class="fa-solid fa-lock"></i>
                 <input type="password" placeholder="Password" name="password" asp-for="Password" class="form-control">
-                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+            <span style="display:block; color:red" asp-validation-for="Password" class="text-danger d-block"></span>
+            <br />
             <p id="Forget">You don't have an account <a asp-action="Register" asp-controller="Account">Register</a> </p>
 
 

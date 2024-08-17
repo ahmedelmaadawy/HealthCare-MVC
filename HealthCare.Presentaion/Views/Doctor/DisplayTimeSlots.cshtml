@@ -22,7 +22,11 @@
                     {
                         <a style="display:inline-block;margin-left:20px" class="btn btn-primary" asp-action="BookNewAppointment" asp-controller="Appointment" asp-route-patientId="@User.Claims.FirstOrDefault(c=>c.Type =="PatientId")?.Value" asp-route-timeslotId="@item.Id">Book Appointment</a>
                     }
-                </div>
+                    else{
+                        <a style="display:inline-block;margin-left:20px" class="btn btn-danger" asp-action="RemoveTimeSlot" asp-controller="Doctor" asp-route-id="@item.Id">Remove</a>
+
+                        }
+                    </div>
             </div>
         }
     </div>

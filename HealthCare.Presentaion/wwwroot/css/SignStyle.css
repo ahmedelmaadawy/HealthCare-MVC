@@ -133,3 +133,8 @@ margin: 0 5px 40px 5px;
     background-color: rgba(0,0,50);
     color: white;
 }
+inbox span {
+    display :block;
+    margin-top:3px;
+    color:red ;
+}

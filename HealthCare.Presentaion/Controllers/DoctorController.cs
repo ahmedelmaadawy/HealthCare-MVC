@@ -3,6 +3,7 @@ using HealthCare.BusinessLogic.ViewModels.TimeSlotVMs;
 using HealthCare.DataAccess.Enums;
 using HealthCare.DataAccess.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -12,9 +13,14 @@ namespace HealthCare.Presentaion.Controllers
     public class DoctorController : Controller
     {
         private readonly IDoctorService _service;
-        public DoctorController(IDoctorService service)
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+
+        public DoctorController(IDoctorService service, SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
         {
             _service = service;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
         [AllowAnonymous]
         public async Task<IActionResult> Index(string searchString, string specialization = "All")
@@ -50,8 +56,14 @@ namespace HealthCare.Presentaion.Controllers
 
             if (ModelState.IsValid)
             {
+                var id = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
                 await _service.Add(doctor);
-                return RedirectToAction("Logout", "Account");
+                var user = await _userManager.FindByIdAsync(id);
+                List<Claim> claims = new List<Claim>();
+                claims.Add(new Claim("DoctorId", $"{doctor.Id}"));
+                await _signInManager.SignInWithClaimsAsync(user, false, claims);
+
+                return RedirectToAction("Index");
             }
             else
             {
@@ -145,7 +157,7 @@ namespace HealthCare.Presentaion.Controllers
         public async Task<IActionResult> DisplayTimeSlots(int id, DateTime Date)
         {
             var doctor = await _service.GetById(id);
-            var timeSlot = doctor.AvailableTimeSlots?.Where(t => t.IsAvailable == true && t.StartTime.Date >= Date.Date).ToList();
+            var timeSlot = doctor.AvailableTimeSlots?.Where(t => t.IsAvailable == true && t.StartTime.Day >= Date.Day).OrderBy(t => t.StartTime).ToList();
             var tmVM = new TimeSlotwithDoctorVM()
             {
                 DoctorName = doctor.FirstName + doctor.LastName,
@@ -154,6 +166,12 @@ namespace HealthCare.Presentaion.Controllers
                 TimeSlots = timeSlot.ToList()
             };
             return View(tmVM);
+        }
+        public async Task<IActionResult> RemoveTimeSlot(int id)
+        {
+            var doctorId = User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value;
+            await _service.DeleteTimeSlot(id);
+            return RedirectToAction("DisplayTimeSlots", new { Id = doctorId, Date = DateTime.Now });
         }
     }
 }

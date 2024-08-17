@@ -12,5 +12,6 @@ namespace HealthCare.BusinessLogic.Interfaces
         public Task Update(int id, Doctor doctor);
         Task Delete(int id);
         Task AddTimeSlot(TimeSlot timeSlot);
+        public Task DeleteTimeSlot(int id);
     }
 }

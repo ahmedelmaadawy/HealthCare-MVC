@@ -3,6 +3,7 @@ using HealthCare.BusinessLogic.Interfaces;
 using HealthCare.BusinessLogic.ViewModels.Patient;
 using HealthCare.DataAccess.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -14,10 +15,14 @@ namespace HealthCare.Presentaion.Controllers
         private readonly IPatientService _service;
         private readonly IMapper _mapper;
 
-        public PatientController(IPatientService service, IMapper mapper)
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        public PatientController(IPatientService service, IMapper mapper, SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
         {
             _service = service;
             _mapper = mapper;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
@@ -44,10 +49,15 @@ namespace HealthCare.Presentaion.Controllers
         {
             if (ModelState.IsValid)
             {
+                var id = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
                 var patient = _mapper.Map<Patient>(patientVm);
                 patient.UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
                 await _service.Add(patient);
-                return RedirectToAction("Logout", "Account");
+                var user = await _userManager.FindByIdAsync(id);
+                List<Claim> claims = new List<Claim>();
+                claims.Add(new Claim("PatientId", $"{patient.Id}"));
+                await _signInManager.SignInWithClaimsAsync(user, false, claims);
+                return RedirectToAction("Index", "Doctor");
             }
             return View(patientVm);
         }

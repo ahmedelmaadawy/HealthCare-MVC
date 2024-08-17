@@ -10,19 +10,19 @@
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
                 <div class="navbar-nav text-center" id="NavElements">
-                    <a asp-action="Index" asp-controller="Doctor" class="nav-link text-white fs-5" style="margin-left:150px">Doctors</a>
+                    <a asp-action="Index" asp-controller="Doctor" class="nav-link text-white fs-5" style="margin-left:230px">Doctors</a>
                     @if (User.Identity.IsAuthenticated)
                     {
                         if (User.IsInRole("Doctor"))
                         {
-                            <a asp-action="GetAllByDay" asp-controller="Appointment" asp-route-day="@DateTime.Now" asp-route-doctorID="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="nav-link text-white fs-5">Appointments</a>
-                            <a asp-action="ViewDoctorMedicalRecords" asp-controller="MedicalRecord" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="nav-link text-white fs-5">Medical Records</a>
-                            <a asp-action="AddTimeSlot" asp-controller="Doctor" asp-route-DoctorId="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="nav-link text-white fs-5">Add Time Slot</a>
+                            <a asp-action="GetAllByDay" asp-controller="Appointment" asp-route-day="@DateTime.Now" asp-route-doctorID="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="ml-3 nav-link text-white fs-5">Appointments</a>
+                            <a asp-action="ViewDoctorMedicalRecords" asp-controller="MedicalRecord" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="ml-3  nav-link text-white fs-5">Medical Records</a>
+                            <a asp-action="AddTimeSlot" asp-controller="Doctor" asp-route-DoctorId="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="nav-link ml-3  text-white fs-5">Add Time Slot</a>
                         }
                         else if (User.IsInRole("Patient"))
                         {
-                            <a asp-action="PatientAppointments" asp-controller="Appointment" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="nav-link text-white fs-5">Appointments</a>
-                            <a asp-action="ViewPatientMedicalRecords" asp-controller="MedicalRecord" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="nav-link text-white fs-5">Medical Records</a>
+                            <a asp-action="PatientAppointments" asp-controller="Appointment" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="ml-3  nav-link text-white fs-5">Appointments</a>
+                            <a asp-action="ViewPatientMedicalRecords" asp-controller="MedicalRecord" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="ml-3  nav-link text-white fs-5">Medical Records</a>
                         }
                     }
                 </div>

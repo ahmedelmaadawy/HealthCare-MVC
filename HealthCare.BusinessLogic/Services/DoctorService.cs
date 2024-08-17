@@ -59,7 +59,12 @@ namespace HealthCare.BusinessLogic.Services
             await _context.TimeSlots.Add(timeSlot);
             await _context.Compelete();
         }
-
+        public async Task DeleteTimeSlot(int id)
+        {
+            var ts = await _context.TimeSlots.GetById(id);
+            _context.TimeSlots.Delete(ts);
+            await _context.Compelete();
+        }
 
     }
 }

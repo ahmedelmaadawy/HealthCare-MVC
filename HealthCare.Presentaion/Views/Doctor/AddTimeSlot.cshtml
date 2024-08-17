@@ -26,6 +26,9 @@
         </div>
     </div>
 </div>
+<div class="container text-center">
+    <a asp-action="DisplayTimeSlots"  class="btn btn-primary" asp-route-id="@User.Claims.FirstOrDefault(c=>c.Type == "DoctorId").Value" asp-route-date ="@DateTime.Now" >See All Your Time Slots</a>
+</div>
 
 <style>
     .input2 {
