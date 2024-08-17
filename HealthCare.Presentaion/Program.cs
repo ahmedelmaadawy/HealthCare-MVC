@@ -34,7 +34,7 @@ namespace HealthCare.Presentaion
             builder.Services.AddScoped<IPatientService, PatientSevice>();
             builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
             builder.Services.AddScoped<IDoctorService, DoctorService>();
-
+            builder.Services.AddScoped<INotificationService, NotificationService>();
 
             builder.Services.AddAutoMapper(typeof(Program));
             //Add Authentication

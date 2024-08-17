@@ -11,10 +11,12 @@ namespace HealthCare.BusinessLogic.Services
     {
         private readonly IUnitOfWork _context;
         private readonly IMapper _mapper;
-        public AppointmentServices(IUnitOfWork context, IMapper mapper)
+        private readonly INotificationService _notificationService;
+        public AppointmentServices(IUnitOfWork context, IMapper mapper, INotificationService notificationService)
         {
             _context = context;
             _mapper = mapper;
+            _notificationService = notificationService;
         }
 
         public async Task<List<Appointment>> GetAllByDoctorId(int doctorId)
@@ -52,6 +54,7 @@ namespace HealthCare.BusinessLogic.Services
                 };
                 await _context.Appointments.Create(appointment);
                 await _context.Compelete();
+                await _notificationService.BookAppointmentNotifications(appointment);
             }
         }
         public async Task Update(Appointment appointment)

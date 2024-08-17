@@ -7,9 +7,14 @@ namespace HealthCare.BusinessLogic.Services
     public class NotificationService : INotificationService
     {
         private readonly IUnitOfWork _context;
+        public NotificationService(IUnitOfWork context)
+        {
+            _context = context;
+        }
         public async Task BookAppointmentNotifications(Appointment appointment)
         {
-            var doctor = await _context.Doctors.GetById(appointment.DoctorId);
+            var doctors = await _context.Doctors.GetAll();
+            var doctor = doctors.Where(d => d.Id == appointment.DoctorId).FirstOrDefault();
             var patients = await _context.Patients.GetAll();
             var patient = patients.Where(p => p.Id == appointment.PatientId).FirstOrDefault();
             var docnotification = new Notification()
@@ -30,7 +35,9 @@ namespace HealthCare.BusinessLogic.Services
                 UserId = patient.UserId,
                 IsRead = false,
             };
-            _context.Notifications.AddNotification(docnotification);
+            await _context.Notifications.AddNotification(docnotification);
+            await _context.Notifications.AddNotification(patnotification);
+            await _context.Compelete();
 
 
         }
