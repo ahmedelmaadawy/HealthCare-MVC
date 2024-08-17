@@ -19,6 +19,7 @@ namespace HealthCare.DataAccess.Context
         public virtual DbSet<MedicalRecord> MedicalRecords { get; set; }
         public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<TimeSlot> TimeSlots { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
 
 
     }

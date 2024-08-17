@@ -14,8 +14,9 @@ namespace HealthCare.DataAccess.Repository
         public IAppointmentRepository Appointments { get; }
         public ITimeSlotRepository TimeSlots { get; private set; }
 
+        public INotificationRepository Notifications { get; }
 
-        public UnitOfWork(ApplicationDbContext context, IDoctorRepository doctors, IMedicalRecordRepositery medicalRecords, IPatientRepository patients, IAppointmentRepository appointments)
+        public UnitOfWork(ApplicationDbContext context, IDoctorRepository doctors, IMedicalRecordRepositery medicalRecords, IPatientRepository patients, INotificationRepository notifications, IAppointmentRepository appointments)
         {
             _context = context;
             TimeSlots = new TimeSlotRepository(_context);
@@ -23,6 +24,7 @@ namespace HealthCare.DataAccess.Repository
             MedicalRecords = medicalRecords;
             Appointments = appointments;
             Patients = patients;
+            Notifications = notifications;
         }
         public async Task<int> Compelete()
         {

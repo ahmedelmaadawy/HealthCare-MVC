@@ -6,8 +6,8 @@
         ITimeSlotRepository TimeSlots { get; }
         IDoctorRepository Doctors { get; }
         IPatientRepository Patients { get; }
-
         IMedicalRecordRepositery MedicalRecords { get; }
+        INotificationRepository Notifications { get; }
         Task<int> Compelete();
 
     }
