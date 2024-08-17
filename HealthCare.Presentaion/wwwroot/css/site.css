@@ -7,10 +7,7 @@
         font-size: 16px;
     }
 }
-/* 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-} */
+
 
 html {
     position: relative;
@@ -31,8 +28,8 @@ body {
 }
 
 .record-card {
-    background-color: #e0f7fa;
-    border: 1px solid #b2ebf2;
+    background-color: #c9d9ee;
+    border: 1px solid #c9d9ee;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -41,12 +38,12 @@ body {
 
     .record-card h3 {
         margin-top: 0;
-        color: #00796b;
+        color: #264d7e;
     }
 
     .record-card p {
         margin: 10px 0;
-        color: #00796b;
+        color: #264d7e;
         line-height: 1.6;
         text-indent: -2em;
         padding-left: 2em;
@@ -56,12 +53,12 @@ body {
     display: inline-block;
     margin-top: 10px;
     padding: 10px 15px;
-    background-color: #00796b;
+    background-color: #2e5f9b;
     color: white;
     text-decoration: none;
     border-radius: 5px;
 }
 
     .details-button:hover {
-        background-color: #004d40;
+        background-color: #3c74b0;
     }

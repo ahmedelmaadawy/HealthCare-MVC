@@ -18,6 +18,7 @@ namespace HealthCare.Presentaion.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var notifications = await _context.Notifications.GetAllByUserId(userId);
+            notifications = notifications.OrderByDescending(n => n.CreatedAt).ToList();
 
 
             return Json(notifications);

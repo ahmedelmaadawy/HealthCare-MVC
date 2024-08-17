@@ -97,7 +97,7 @@
                     if (data.length > 0) {
                         $('#notificationCount').text(data.length);
                         $.each(data, function (index, notification) {
-                            notificationList.append('<li><a class="dropdown-item" href="#">' + notification.title + '<br/><small>' + notification.message + '</small></a></li>');
+                            notificationList.append('<li  style="background-color:#c9d9ee;"><a class="dropdown-item" href="#">' + notification.title + '<br/><small>' + notification.message + '</small></a></li><hr>');
                         });
                     } else {
                         notificationList.append('<li><a class="dropdown-item" href="#">No new notifications</a></li>');

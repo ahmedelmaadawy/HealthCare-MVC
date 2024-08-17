@@ -55,6 +55,8 @@ namespace HealthCare.Presentaion.Controllers
         public async Task<IActionResult> ViewDoctorMedicalRecords(int id)
         {
             var records = await _service.GetMedicalRecordsByDoctor(id);
+            records = records.OrderByDescending(m => m.AppointmentDate).ToList();
+
             return View(records);
         }
 
@@ -63,6 +65,7 @@ namespace HealthCare.Presentaion.Controllers
         public async Task<IActionResult> ViewPatientMedicalRecords(int id)
         {
             var records = await _service.GetMedicalRecordsByPatient(id);
+            records = records.OrderByDescending(m => m.AppointmentDate).ToList();
             return View(records);
         }
     }
