@@ -19,6 +19,7 @@ This is a healthcare appointment booking system built using ASP.NET MVC (.NET 8)
 - AutoMapper: Streamlines object-to-object mapping between different layers.
 - EF Core: Used for data mapping between the application and MSSQL Server database.
 - Asynchronous Programming: Enhances performance and scalability by making use of async/await in data access layers.
+- Notification Service: Provides real-time notifications for appointment updates and other important events, improving user engagement and communication.
 
 ## Getting Started
 
@@ -33,7 +34,7 @@ This is a healthcare appointment booking system built using ASP.NET MVC (.NET 8)
 3. Restore NuGet packages:
 4. Update the connection string in appsettings.json to point to your MSSQL Server instance.
 5. Apply migrations to set up the database:
-6. Run the application:
+6. Run the application
 
 ## Usage
 
@@ -54,6 +55,12 @@ This is a healthcare appointment booking system built using ASP.NET MVC (.NET 8)
 - Repository Pattern
 - IUnitOfWork
 
+## Team Members
+ - [Ahmed Elmaadawy](https://github.com/ahmedelmaadawy)
+ - [Mohamed Mostafa Dohdoh](https://github.com/mohamedmoustafaeg)
+ - [Mohamed Saber](https://github.com/muhamedsaber1234)
+ - [Islam Ragab](https://github.com/ragaabislam)
+ - [Abdelrahman Elbahnasawy](https://github.com/Abdelrhman066)
 
 # Contact
 For any inquiries or feedback, please contact me at ahmed.elmaadawy03@gmail.com.
