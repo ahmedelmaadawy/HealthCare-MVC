@@ -1,6 +1,6 @@
 ﻿@using System.Security.Claims
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark  shadow-sm" style="background-color:#3b73af">
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background-color:#3b73af">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <h2 class="mb-0 text-white">Medicnova</h2>
@@ -9,32 +9,50 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
-                <div class="navbar-nav text-center" id="NavElements">
-                    <a asp-action="Index" asp-controller="Doctor" class="nav-link text-white fs-5" style="margin-left:230px">Doctors</a>
+                <div class="navbar-nav text-center" style="margin:0 auto" id="NavElements">
+                    <a asp-action="Index" asp-controller="Doctor" class="nav-link text-white fs-6 mx-3">
+                        <i class="fas fa-user-md"></i>
+                        <span>Doctors</span>
+                    </a>
                     @if (User.Identity.IsAuthenticated)
                     {
                         if (User.IsInRole("Doctor"))
                         {
-                            <a asp-action="GetAllByDay" asp-controller="Appointment" asp-route-day="@DateTime.Now" asp-route-doctorID="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="ml-3 nav-link text-white fs-5">Appointments</a>
-                            <a asp-action="ViewDoctorMedicalRecords" asp-controller="MedicalRecord" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="ml-3  nav-link text-white fs-5">Medical Records</a>
-                            <a asp-action="AddTimeSlot" asp-controller="Doctor" asp-route-DoctorId="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="nav-link ml-3  text-white fs-5">Add Time Slot</a>
+                            <a asp-action="GetAllByDay" asp-controller="Appointment" asp-route-day="@DateTime.Now" asp-route-doctorID="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="nav-link text-white fs-6 mx-3">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Appointments</span>
+                            </a>
+                            <a asp-action="ViewDoctorMedicalRecords" asp-controller="MedicalRecord" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="nav-link text-white fs-6 mx-3">
+                                <i class="fas fa-file-medical"></i>
+                                <span>Medical Records</span>
+                            </a>
+                            <a asp-action="AddTimeSlot" asp-controller="Doctor" asp-route-DoctorId="@User.Claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value" class="nav-link text-white fs-6 mx-3">
+                                <i class="fas fa-clock"></i>
+                                <span>Add Time Slot</span>
+                            </a>
                         }
                         else if (User.IsInRole("Patient"))
                         {
-                            <a asp-action="PatientAppointments" asp-controller="Appointment" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="ml-3  nav-link text-white fs-5">Appointments</a>
-                            <a asp-action="ViewPatientMedicalRecords" asp-controller="MedicalRecord" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="ml-3  nav-link text-white fs-5">Medical Records</a>
+                            <a asp-action="PatientAppointments" asp-controller="Appointment" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="nav-link text-white fs-6 mx-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Appointments</span>
+                            </a>
+                            <a asp-action="ViewPatientMedicalRecords" asp-controller="MedicalRecord" asp-route-Id="@User.Claims.FirstOrDefault(c => c.Type == "PatientId")?.Value" class="nav-link text-white fs-6 mx-3">
+                                <i class="fas fa-notes-medical"></i>
+                                <span>Medical Records</span>
+                            </a>
                         }
                     }
                 </div>
-                <div class="navbar-nav ms-auto d-flex align-items-center">
+                <div class="navbar-nav mx-3 d-flex align-items-center">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <span class="navbar-text text-light mr-5 fs-5">@User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value</span>
+                        <span class="navbar-text text-light fs-6 mx-3">@User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value</span>
 
-                        <div class="dropdown">
-                            <a class="nav-link dropdown-toggle text-white fs-5" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="dropdown mx-3">
+                            <a class="text-white fs-6" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-bell"></i>
-                                <span id="notificationCount" class="badge bg-danger">0</span>
+                                <span id="notificationCount" class="badge bg-danger position-absolute top-0 start-100 translate-middle">0</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown" id="notificationList">
                                 <!-- Notifications will be dynamically loaded here -->
@@ -42,11 +60,11 @@
                         </div>
 
                         <!-- Settings Dropdown -->
-                        <div class="dropdown">
-                            <a class="nav-link dropdown-toggle text-white fs-5" href="#" id="settingsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="dropdown mx-3">
+                            <a class="text-white fs-6" href="#" id="settingsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-cog"></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingsDropdown">
+                            <ul class="dropdown-menu dropdown-menu-end" style="width:150px;" aria-labelledby="settingsDropdown">
                                 <li><a asp-action="Index" asp-controller="Profile" class="dropdown-item"><i class="fas fa-user me-2"></i> Profile</a></li>
                                 <li><a asp-action="Logout" asp-controller="Account" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
                             </ul>
@@ -55,8 +73,8 @@
                     <div>
                         @if (!User.Identity.IsAuthenticated)
                         {
-                            <a asp-action="Login" asp-controller="Account" class="btn me-2" style="background-color:#1E88E5" id="LogInBtn">Login</a>
-                            <a asp-action="Register" asp-controller="Account" class="btn btn-success me-4" id="RegBtn" style="background-color: #4CAF50">Register</a>
+                            <a asp-action="Login" asp-controller="Account" class="btn btn-light me-2" id="LogInBtn">Login</a>
+                            <a asp-action="Register" asp-controller="Account" class="btn btn-success me-4" id="RegBtn">Register</a>
                         }
                     </div>
                 </div>
@@ -64,6 +82,7 @@
         </div>
     </nav>
 </header>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -83,8 +102,6 @@
                     } else {
                         notificationList.append('<li><a class="dropdown-item" href="#">No new notifications</a></li>');
                     }
-                
-
                 }
             });
         }
@@ -93,20 +110,50 @@
 
         setInterval(loadNotifications, 60000);
     });
-
 </script>
 
 <style>
     .dropdown-menu {
         max-height: 300px;
         overflow-y: auto;
-        width: 300px; /* Set a fixed width to ensure proper wrapping */
+        width: 300px;
     }
 
     .dropdown-item {
-        white-space: normal; /* Allows text to wrap */
-        padding: 10px; /* Add some padding for better readability */
+        white-space: normal;
+        padding: 10px;
     }
 
+    .nav-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: background-color 0.3s, color 0.3s;
+        padding: 5px 10px;
+    }
 
+        .nav-link:hover, .btn:hover {
+            background-color: #1E88E5;
+            color: #fff;
+            border-radius: 7px;
+        }
+
+    .fas {
+        font-size: 1.3rem;
+    }
+
+    .nav-link span {
+        font-size: 0.8rem;
+    }
+
+    .navbar-brand h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Adjusting notification badge position */
+    #notificationCount {
+        font-size: 0.8rem;
+        padding: 4px;
+        border-radius: 50%;
+    }
 </style>
