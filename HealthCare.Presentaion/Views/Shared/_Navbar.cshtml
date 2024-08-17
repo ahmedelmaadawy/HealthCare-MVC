@@ -29,19 +29,34 @@
                 <div class="navbar-nav ms-auto d-flex align-items-center">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <span class="navbar-text text-light me-2 fs-5" style="font-size:100px">@User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value</span>
-                        <a asp-action="Index" asp-controller="Profile" class="nav-link text-white me-4 fs-5">Profile</a>
+                        <span class="navbar-text text-light mr-5 fs-5">@User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value</span>
 
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle text-white fs-5" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bell"></i>
+                                <span id="notificationCount" class="badge bg-danger">0</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown" id="notificationList">
+                                <!-- Notifications will be dynamically loaded here -->
+                            </ul>
+                        </div>
+
+                        <!-- Settings Dropdown -->
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle text-white fs-5" href="#" id="settingsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-cog"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingsDropdown">
+                                <li><a asp-action="Index" asp-controller="Profile" class="dropdown-item"><i class="fas fa-user me-2"></i> Profile</a></li>
+                                <li><a asp-action="Logout" asp-controller="Account" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                            </ul>
+                        </div>
                     }
                     <div>
                         @if (!User.Identity.IsAuthenticated)
                         {
-                            <a asp-action="Login" asp-controller="Account" class="btn  me-2 " style="background-color:#1E88E5" id="LogInBtn">Login</a>
+                            <a asp-action="Login" asp-controller="Account" class="btn me-2" style="background-color:#1E88E5" id="LogInBtn">Login</a>
                             <a asp-action="Register" asp-controller="Account" class="btn btn-success me-4" id="RegBtn" style="background-color: #4CAF50">Register</a>
-                        }
-                        else
-                        {
-                            <a asp-action="Logout" asp-controller="Account" class="btn btn-danger" id="LogOutBtn">Logout</a>
                         }
                     </div>
                 </div>
@@ -49,3 +64,49 @@
         </div>
     </nav>
 </header>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function loadNotifications() {
+            $.ajax({
+                url: '/Notification/GetUserNotifications',
+                type: 'GET',
+                success: function (data) {
+                    var notificationList = $('#notificationList');
+                    notificationList.empty();
+
+                    if (data.length > 0) {
+                        $('#notificationCount').text(data.length);
+                        $.each(data, function (index, notification) {
+                            notificationList.append('<li><a class="dropdown-item" href="#">' + notification.title + '<br/><small>' + notification.message + '</small></a></li>');
+                        });
+                    } else {
+                        notificationList.append('<li><a class="dropdown-item" href="#">No new notifications</a></li>');
+                    }
+                
+
+                }
+            });
+        }
+
+        loadNotifications();
+
+        setInterval(loadNotifications, 60000);
+    });
+
+</script>
+
+<style>
+    .dropdown-menu {
+        max-height: 300px;
+        overflow-y: auto;
+        width: 300px; /* Set a fixed width to ensure proper wrapping */
+    }
+
+    .dropdown-item {
+        white-space: normal; /* Allows text to wrap */
+        padding: 10px; /* Add some padding for better readability */
+    }
+
+
+</style>

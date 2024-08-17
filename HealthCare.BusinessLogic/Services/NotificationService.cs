@@ -20,7 +20,7 @@ namespace HealthCare.BusinessLogic.Services
             var docnotification = new Notification()
             {
                 Title = "New Appointment Booked",
-                Message = $" Patinet : {patient.FirstName + ' ' + patient.LastName} Booked A New Appointment.\nDate : {appointment.DateTime.Date}\nTime {appointment.DateTime.ToShortTimeString}" +
+                Message = $" Patinet : {patient.FirstName + ' ' + patient.LastName} Booked A New Appointment.\nDate : {appointment.DateTime.Date.ToShortDateString}\nTime {appointment.DateTime.Date.ToShortTimeString}" +
                 $"\npatients Contact : {patient.ContactNumber}",
                 CreatedAt = DateTime.Now,
                 UserId = doctor.UserId,
